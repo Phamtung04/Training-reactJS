@@ -7,6 +7,8 @@ import { CssVarsProvider } from '@mui/joy';
 import Register from './pages/authentication/register/Register';
 import UpdateUsers from './pages/user/updateUsers/UpdateUsers';
 import AppProvider from './contexts/AppProvider';
+import UpdateUserContainer from './pages/user/updateUsers/UpdateUserContainer';
+import Language from './components/sidebar/Language';
 
 function App() {
   return (
@@ -16,12 +18,6 @@ function App() {
           <Router />
         </AppProvider>
       </CssVarsProvider>
-      {/* <RegisterTestContainer/> */}
-
-      {/* <UpdateUsers/> */}
-
-      {/* <DashboardLayoutSlots/> */}
-      {/* <ListUsers/> */}
     </>
   );
 }

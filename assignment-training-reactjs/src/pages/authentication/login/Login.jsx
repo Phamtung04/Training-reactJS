@@ -2,16 +2,19 @@ import { Box } from '@mui/material';
 import React, { Fragment, useState } from 'react';
 import {useFormContext } from 'react-hook-form';
 import CustomTextField from './../../../components/Field/TextField';
+import { useTranslation } from 'react-i18next';
+
 
 const Login = () => {
  const {control} = useFormContext();
+ const {t} = useTranslation();
 
   return (
     <Fragment>
       <Box sx={{ '& > :not(style)': { m: 1 } }}>
         <CustomTextField
           id="filled-search"
-          label="Email"
+          label={t('loginContainer.Email')}
           name='email'
           placeholder="your@email.com"
           variant="filled"
@@ -27,7 +30,7 @@ const Login = () => {
       <Box sx={{ '& > :not(style)': { m: 1 } }}>
         <CustomTextField
           id="outlined-password-input"
-          label="Password"
+          label={t('loginContainer.Password')}
           name='password'
           type="password"
           placeholder="*********"

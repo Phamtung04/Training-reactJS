@@ -1,83 +1,235 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import ListUsers from './ListUsers';
+import ToolbarActionsSearch from '../../../components/sidebar/ToolbarActionsSearch';
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Modal,
+  Paper,
+  Select,
+  TableContainer,
+  TablePagination,
+} from '@mui/material';
+import { UserService } from './../../../api/apiService/UserService';
+import { jwtDecode } from 'jwt-decode';
+import { role } from '../../../constants/Enum';
+import Delete from '../../../components/delete/Delete';
+import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
+import { VALIDATE_CODES } from '../../../constants/ValidateCode';
+import UpdateUserContainer from '../updateUsers/UpdateUserContainer';
+import { useTranslation } from 'react-i18next';
+
+const fetchUsers = async (searchValue, page, rowsPerPage) => {
+  try {
+    const queryParams = new URLSearchParams({
+      page: page + 1,
+      limit: rowsPerPage,
+      sortName: 'role',
+      direction: 'ASC',
+      // ...(searchValue.userName && { search: searchValue.userName }),
+    }).toString();
+
+    const requestBody = {
+      userName: searchValue.userName || '',
+      fullName: searchValue.fullName || '',
+      role: searchValue.role || '',
+    };
+
+    const response = await UserService.searchUsers(requestBody, queryParams);
+    return response.data;
+  } catch (error) {
+    console.error('Lỗi khi gọi API tìm kiếm người dùng:', error);
+    throw error;
+  }
+};
 
 const ListUserContainer = () => {
-  const columns = [
-    { id: 'fullName', label: 'Full name', minWidth: 170 },
-    { id: 'userName', label: 'userName', minWidth: 150 },
-    {
-      id: 'dob',
-      label: 'Ngày sinh',
-      minWidth: 100,
-      align: 'center',
-    },
-    {
-      id: 'role',
-      label: 'Role',
-      minWidth: 150,
-      align: 'center',
-    },
-    {
-      id: 'actions',
-      label: 'Actions',
-      minWidth: 200,
-      align: 'center',
-    },
-  ];
-
-  function createData(id, fullName, userName, dob, role) {
-    return { id, fullName, userName, dob, role };
-  }
-
-  const rows = [
-    createData(1, 'Nguyễn Văn A', 'nguyenvana', '1990-05-15', 'Admin'),
-    createData(2, 'Trần Thị B', 'tranthib', '1995-09-20', 'User'),
-    createData(3, 'Lê Văn C', 'levanc', '1988-12-10', 'Admin'),
-    createData(4, 'Phạm Thị D', 'phamthid', '2000-07-30', 'User'),
-    createData(5, 'Hoàng Văn E', 'hoangvane', '1992-03-25', 'Admin'),
-    createData(6, 'Đặng Thị F', 'dangthif', '1998-11-12', 'User'),
-    createData(7, 'Bùi Văn G', 'buivang', '1985-06-05', 'Admin'),
-    createData(8, 'Lý Thị H', 'lythih', '1993-08-18', 'User'),
-    createData(9, 'Vũ Văn I', 'vuvani', '2001-04-02', 'User'),
-    createData(10, 'Dương Thị J', 'duongthij', '1996-10-14', 'Admin'),
-    createData(11, 'Đặng Thị E', 'dangthie', '1998-11-12', 'User'),
-    createData(12, 'Bùi Văn O', 'buivano', '1985-06-05', 'Admin'),
-    createData(13, 'Lý Thị T', 'lythit', '1993-08-18', 'User'),
-    createData(14, 'Vũ Văn B', 'vuvanb', '2001-04-02', 'User'),
-    createData(15, 'Dương Thị A', 'duongthia', '1996-10-14', 'Admin'),
-  ];
-
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [searchValue, setSearchValue] = useState({
+    userName: '',
+    fullName: '',
+    role: '',
+  });
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUserName, setSelectedUserName] = useState(null);
+  const [openUpdateModal, setOpenUpdateModal] = useState(false);
+  const { showError, showSuccess } = useErrorAndSuccess();
+
+  const {t} = useTranslation();
+
+  const queryClient = useQueryClient();
+
+  const columns = [
+    { id: 'fullName', label: t('tableContainer.fullName'), minWidth: 170 },
+    { id: 'userName', label: t('tableContainer.userName'), minWidth: 150 },
+    { id: 'dob', label: t('tableContainer.birthday'), minWidth: 100, align: 'center' },
+    { id: 'role', label: t('tableContainer.role'), minWidth: 150, align: 'center' },
+    { id: 'actions', label: t('tableContainer.action'), minWidth: 200, align: 'center' },
+  ];
+
+  const openModalUpdate = (id) => {
+    setSelectedUserId(id)
+    setOpenUpdateModal(true);
+  };
+  
+  const handleCloseModalUpdate = () => {
+    setOpenUpdateModal(false);
+  };
+
+  
+  
+
+  const openModalDelete = (id, name) => {
+    setSelectedUserId(id);
+    setSelectedUserName(name);
+    setOpenDeleteModal(true);
+  };
+
+  const handleCloseModalDelete = () => {
+    setOpenDeleteModal(false);
+  };
+
+ 
+
+  const { mutate: deleteUser } = useMutation({
+    mutationFn: async (id) => {
+      await UserService.deleteUser({ id });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+      showSuccess(VALIDATE_CODES.I0001);
+      setOpenDeleteModal(false);
+      setSelectedUserId(null);
+    },
+    onError: (error) => {
+      showError(VALIDATE_CODES.I0002)
+      console.error('Lỗi khi xóa người dùng:', error);
+    },
+  });
+  const confirmDelete = () => {
+    console.log('Delete user with id:', selectedUserId);
+
+    if (!selectedUserId) return;
+    deleteUser(selectedUserId);
+
+    setOpenDeleteModal(false);
+    setSelectedUserId(null);
+  };
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['users', searchValue, page, rowsPerPage],
+    queryFn: () => fetchUsers(searchValue, page, rowsPerPage),
+    keepPreviousData: true,
+  });
+
+  const formattedRows = (data?.data?.docs || []).map((row) => ({
+    ...row,
+    dob: row.dob ? new Date(row.dob).toLocaleDateString('vi-VN') : '',
+    role: Number(row.role) === role.ADMIN ? 'Admin' : 'User',
+  }));
+
+
+  const rows = data?.data?.docs?.length || [];
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    const newRowsPerPage = parseInt(event.target.value, 10);
+    console.log('Selected rows per page:', newRowsPerPage);
+    setRowsPerPage(newRowsPerPage);
     setPage(0);
   };
 
   const handleUpdate = (id) => {
     console.log('Update user with id:', id);
-    // Viết logic update user tại đây
   };
 
-  const handleDelete = (id) => {
-    console.log('Delete user with id:', id);
-    // Viết logic xóa user tại đây
+  const handleSearchChange = (field, value) => {
+    setSearchValue((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
-  return {
-    columns,
-    rows,
-    page,
-    rowsPerPage,
-    handleChangePage,
-    handleChangeRowsPerPage,
-    handleUpdate,
-    handleDelete,
-  };
+  const token = localStorage.getItem('token');
+  const decoded = jwtDecode(token);
+  const currentUserRole = decoded.data.role;
+
+  return (
+    <div className="mt-10">
+      <div className="flex justify-between items-center">
+        <ToolbarActionsSearch
+          onChange={(e) => {
+            handleSearchChange('userName', e.target.value);
+          }}
+          label={t('searchContainer.searchByUserName')}
+        />
+        <ToolbarActionsSearch
+          onChange={(e) => {
+            handleSearchChange('fullName', e.target.value);
+          }}
+          label={t('searchContainer.searchByFullName')}
+        />
+        <FormControl variant="standard" sx={{ mr: 2, mb: 1, width: '200px' }}>
+          <InputLabel>{t('searchContainer.searchByRole')}</InputLabel>
+          <Select
+            sx={{ color: 'white' }}
+            value={searchValue.role}
+            onChange={(e) => handleSearchChange('role', e.target.value)}
+          >
+            <MenuItem value="">Tất cả</MenuItem>
+            <MenuItem value={role.ADMIN}>Admin</MenuItem>
+            <MenuItem value={role.USER}>User</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+
+      <Paper elevation={0} sx={{ mt: 5, width: '100%', overflow: 'hidden' }}>
+        <TableContainer sx={{ maxHeight: 440 }} className="flow">
+          <ListUsers
+            columns={columns}
+            rows={isLoading ? [] : formattedRows}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            currentUserRole={currentUserRole}
+            handleUpdate={openModalUpdate}
+            handleDelete={openModalDelete}
+            handleName={selectedUserName}
+          />
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={rows || 0}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+
+      <Modal open={openUpdateModal} onClose={handleCloseModalUpdate}>
+        <UpdateUserContainer
+          onclose={handleCloseModalUpdate}
+          id={selectedUserId}
+        />
+      </Modal>
+
+      <Delete
+        open={openDeleteModal}
+        onClose={handleCloseModalDelete}
+        onDelete={confirmDelete}
+        id={selectedUserId}
+        name={`userName "${selectedUserName}"`}
+      />
+    </div>
+  );
 };
 
 export default ListUserContainer;

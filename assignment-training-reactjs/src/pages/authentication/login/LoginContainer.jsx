@@ -4,15 +4,17 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Card } from '@mui/material';
 import Login from './Login';
-import { loginSchema } from './../../../yupGlobal';
 import { useMutation } from '@tanstack/react-query';
 import { AuthService } from '../../../api/apiService/AuthService';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { VALIDATE_CODES } from '../../../constants/ValidateCode';
+import { useTranslation } from 'react-i18next';
+import { loginSchema } from './config';
 
 const LoginContainer = () => {
   const navigate = useNavigate();
   const {showError} = useErrorAndSuccess();
+  const {t} = useTranslation();
 
 
   const methods = useForm({
@@ -27,7 +29,8 @@ const LoginContainer = () => {
     onSuccess: (data) => {
       navigate('/users');
       console.log('login success:', data)
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.data.data.accessToken);
+      
     },
 
     onError: (error) => {
@@ -54,12 +57,12 @@ const LoginContainer = () => {
           width: '500px',
         }}
       >
-        <h1 className="my-5">Sign in</h1>
+        <h1 className="my-5">{t('loginContainer.Login')}</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Login />
 
           <Button variant="contained" type="submit" sx={{ my: 3, ml: 1, width: '300px' }}>
-            Login
+          {t('loginContainer.Login')}
           </Button>
           <div className="flex gap-2 items-center justify-center">
             <Link
@@ -69,13 +72,13 @@ const LoginContainer = () => {
               variant="body2"
               sx={{ alignSelf: 'center' }}
             >
-              <p className='text-white'>Forgot your password?</p>
+              <p className='text-white'>{t('loginContainer.forgetYourPassword')}</p>
             </Link>
           </div>
         </form>
         <div className="flex gap-2 items-center justify-center my-5">
-          <p>if you have already account?</p>
-          <button onClick={() => navigate('/register')}>Register</button>
+          <p>{t('loginContainer.ifYouHaveAlreadyAccount')}</p>
+          <button onClick={() => navigate('/register')}>{t('loginContainer.register')}</button>
         </div>
       </Card>
     </FormProvider>

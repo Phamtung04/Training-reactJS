@@ -11,6 +11,8 @@ import CustomAppTitle from '../components/sidebar/CustomAppTitle';
 import PageContent from './../components/sidebar/PageContent';
 import { Outlet, useLocation } from 'react-router-dom';
 import demoTheme from '../constants/theme';
+import Language from '../components/sidebar/Language';
+
 
 const NAVIGATION = [
   {
@@ -39,7 +41,7 @@ function DashboardLayoutSlots() {
         <DashboardLayout
           slots={{
             appTitle: CustomAppTitle,
-            // toolbarActions: ToolbarActionsSearch,
+            toolbarActions: Language,
             sidebarFooter: SidebarFooter,
           }}
         >

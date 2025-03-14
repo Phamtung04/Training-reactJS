@@ -1,4 +1,4 @@
-const URL_API  = import.meta.env.VITE_BASE_URL;
+const URL_API = import.meta.env.VITE_BASE_URL;
 
 export const API_PATH = {
   AUTH: {
@@ -8,10 +8,12 @@ export const API_PATH = {
     CONFIRM_PASSWORD: `${URL_API}/api/v1/auth/confirm-password-code`,
   },
   USER: {
-    LIST_USER: `${URL_API}/api/v1/users/list?page=1&limit=20&sortName=userName&direction=ASC`,
+    // SEARCH_USER: `${URL_API}/api/v1/users/list?page=1&limit=20&sortName=role&direction=ASC`,
+    SEARCH_USER: `${URL_API}/api/v1/users/list`, // Bỏ các tham số cứng
     UPDATE_USER: `${URL_API}/api/v1/users/update`,
     DELETE_USER: `${URL_API}/api/v1/users/delete`,
-  }
+    GET_USER_BY_ID: `${URL_API}/api/v1/users/detail`,
+  },
 };
 
 export default API_PATH;

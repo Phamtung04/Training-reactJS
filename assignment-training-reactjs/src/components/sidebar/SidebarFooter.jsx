@@ -1,9 +1,11 @@
 import { Avatar, Button, Typography } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function SidebarFooter({ mini }) {
   const navigator = useNavigate();
+  const {t} = useTranslation();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -28,7 +30,7 @@ function SidebarFooter({ mini }) {
         ) : (
           <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Avatar alt="Sharp" src="/static/images/avatar/1.jpg" />
-            Sign Out
+            {t('menuContainer.logout')}
             <LogoutIcon />
           </span>
         )}

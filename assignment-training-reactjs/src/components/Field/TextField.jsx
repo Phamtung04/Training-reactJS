@@ -11,6 +11,7 @@ const CustomTextField = ({ name, control, label, placeholder, className, sx, ...
           {...field}
           label={label}
           variant="standard"
+          value={field.value ?? ''}
           className={className}
           placeholder={placeholder}
           sx={sx}

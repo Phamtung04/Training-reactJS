@@ -2,15 +2,17 @@ import { DialogContent, DialogContentText } from '@mui/material';
 import React, { Fragment } from 'react';
 import CustomTextField from './../../../components/Field/TextField';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
 
 export const ForgotPassword = () => {
   const { control } = useFormContext();
+  const { t } = useTranslation();
   return (
     <Fragment>
       <DialogContent>
         <DialogContentText sx={{ color: 'white' }}>
-          Please enter your email address and we will send you a password code to reset your
-          password.
+        {t('resetPasswordContainer.title')}
         </DialogContentText>
         <CustomTextField
           autoFocus

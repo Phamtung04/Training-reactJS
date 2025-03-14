@@ -11,10 +11,12 @@ import { useNavigate } from 'react-router-dom';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { VALIDATE_CODES } from '../../../constants/ValidateCode';
 import { PasswordVerifiedContext } from '../../../contexts/PasswordVerifiedContext';
+import { useTranslation } from 'react-i18next';
 
 const ForgotPasswordContainer = () => {
 
   const { setEmail } = useContext(PasswordVerifiedContext);
+  const {t} = useTranslation();
 
 
   const navigate = useNavigate();
@@ -60,12 +62,12 @@ const ForgotPasswordContainer = () => {
         }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <DialogTitle>Reset Password</DialogTitle>
+          <DialogTitle>{t('resetPasswordContainer.reset')}</DialogTitle>
           <ForgotPassword />
           <DialogActions sx={{ pb: 3, px: 3 }}>
-            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>{t('resetPasswordContainer.cancel')}</Button>
             <Button variant="contained" type="submit">
-              Continue
+            {t('resetPasswordContainer.continue')}
             </Button>
           </DialogActions>
         </form>

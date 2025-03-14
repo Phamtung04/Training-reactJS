@@ -2,7 +2,7 @@ import { IconButton, Stack, TextField, Tooltip } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 
-function ToolbarActionsSearch() {
+function ToolbarActionsSearch({ onChange, label }) {
     return (
       <Stack direction="row">
         <Tooltip title="Search" enterDelay={1000} >
@@ -19,9 +19,10 @@ function ToolbarActionsSearch() {
           </div>
         </Tooltip>
         <TextField
-          label="Search"
+          label={label}
           variant="outlined"
           size="small"
+          onChange={onChange}
           slotProps={{
             input: {
               endAdornment: (

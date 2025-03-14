@@ -12,6 +12,7 @@ import AuthRoute from './AuthRoute';
 import ProtectedRoute from './ProtectedRoute';
 import ForgotPasswordContainer from './../pages/forgotPassword/forgotPassword/ForgotPasswordContainer';
 import PasswordCodeContainer from '../pages/forgotPassword/passwordCode/PasswordCodeContainer';
+import ListUserContainer from '../pages/user/listUser/ListUserContainer';
 
 const Router = () => {
   const element = useRoutes([
@@ -37,8 +38,8 @@ const Router = () => {
         {
           element: <DashboardLayoutSlots />,
           children: [
-            { element: <ListUsers />, index: true },
-            { element: <ListUsers />, path: '/users' },
+            { element: <ListUserContainer />, index: true },
+            { element: <ListUserContainer />, path: '/users' },
             { element: <Order />, path: '/orders' },
           ],
         },

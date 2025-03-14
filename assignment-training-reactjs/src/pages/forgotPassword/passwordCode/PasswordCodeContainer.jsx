@@ -10,11 +10,13 @@ import { PasswordVerifiedContext } from '../../../contexts/PasswordVerifiedConte
 import { useMutation } from '@tanstack/react-query';
 import { AuthService } from '../../../api/apiService/AuthService';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
+import { useTranslation } from 'react-i18next';
 
 const PasswordCodeContainer = () => {
   const navigate = useNavigate();
   const {showError} = useErrorAndSuccess();
   const { email } = useContext(PasswordVerifiedContext);
+  const {t} = useTranslation();
 
   const schema = yup.object().shape({
     passwordCode: yup.string().required(VALIDATE_CODES.E0001),
@@ -61,12 +63,12 @@ const PasswordCodeContainer = () => {
         }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <DialogTitle>Enter code</DialogTitle>
+          <DialogTitle>{t('passCodeContainer.passCode')}</DialogTitle>
           <PasswordCode />
           <DialogActions sx={{ pb: 3, px: 3 }}>
-            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose}>{t('passCodeContainer.cancel')}</Button>
             <Button variant="contained" type="submit">
-              Continue
+            {t('passCodeContainer.continue')}
             </Button>
           </DialogActions>
         </form>

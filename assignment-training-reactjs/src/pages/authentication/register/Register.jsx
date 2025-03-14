@@ -9,14 +9,16 @@ import { Controller, useFormContext } from 'react-hook-form';
 import dayjs from 'dayjs';
 import CustomTextField from '../../../components/Field/TextField';
 import CustomSelectField from '../../../components/Field/CustomSelectField';
+import { useTranslation } from 'react-i18next';
 
 const Register = () => {
   const { control } = useFormContext();
+  const {t} = useTranslation();
   return (
     <Fragment>
       <Box sx={{ '& > :not(style)': { m: 1 } }}>
         <Typography variant="h2" component="h5">
-          Register
+        {t('registerContainer.register')}
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
           <Box sx={{ height: '60px' }}>
@@ -25,7 +27,7 @@ const Register = () => {
               <CustomTextField
                 id="input-with-sx"
                 name="userName"
-                label="userName"
+                label={t('registerContainer.userName')}
                 variant="standard"
                 control={control}
                 className="w-70"
@@ -43,7 +45,7 @@ const Register = () => {
               <CustomTextField
                 id="input-with-sx"
                 name="fullName"
-                label="Full name"
+                label={t('registerContainer.fullName')}
                 variant="standard"
                 control={control}
                 className="w-70"
@@ -65,7 +67,7 @@ const Register = () => {
                 id="input-with-sx"
                 name="email"
                 control={control}
-                label="Email"
+                label={t('registerContainer.Email')}
                 variant="standard"
                 className="w-70"
                 sx={{
@@ -81,7 +83,7 @@ const Register = () => {
               <ContactPhoneIcon sx={{ mr: 1, my: 0.5 }} />
               <CustomTextField
                 id="input-with-sx"
-                label="Phone number"
+                label={t('registerContainer.phone')}
                 name="phoneNumber"
                 control={control}
                 variant="standard"
@@ -111,16 +113,17 @@ const Register = () => {
               render={({ field }) => (
                 <CustomTextField
                   {...field}
-                  label="Date birth"
+                  label={t('registerContainer.birthday')}
                   control={control}
                   type="date"
-                  value={field.value ? dayjs(field.value).format('YYYY-MM-DD') : ''}
-                  onChange={(e) => {
-                    const formattedDate = e.target.value
-                      ? dayjs(e.target.value).format('YYYY-MM-DD')
-                      : '';
-                    field.onChange(formattedDate);
-                  }}
+                  value={field.value || ''}
+                  // value={field.value ? dayjs(field.value).format('YYYY-MM-DD') : ''}
+                  // onChange={(e) => {
+                  //   const formattedDate = e.target.value
+                  //     ? dayjs(e.target.value).format('YYYY-MM-DD')
+                  //     : '';
+                  //   field.onChange(formattedDate);
+                  // }}
                   variant="standard"
                   className="w-50"
                   sx={{
@@ -140,11 +143,11 @@ const Register = () => {
           <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 2, height: '60px'}}>
             <CustomSelectField
               name="gender"
-              label="Gender"
+              label={t('registerContainer.gender')}
               control={control}
               options={[
-                { value: gender.NAM, label: 'Nam' },
-                { value: gender.NU, label: 'Nữ' },
+                { value: gender.NAM, label: t('registerContainer.male')},
+                { value: gender.NU, label: t('registerContainer.female') },
               ]}
               sx={{
                 ml: 0.5,
@@ -158,11 +161,11 @@ const Register = () => {
           <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 2, height: '60px' }}>
             <CustomSelectField
               name="role"
-              label="Role"
+              label={t('registerContainer.role')}
               control={control}
               options={[
-                { value: role.ADMIN, label: 'Quản trị viên' },
-                { value: role.USER, label: 'Nhân viên' },
+                { value: role.ADMIN, label: t('registerContainer.admin') },
+                { value: role.USER, label: t('registerContainer.user') },
               ]}
             />
           </Box>
@@ -174,7 +177,7 @@ const Register = () => {
               <KeyIcon sx={{ mr: 1, my: 0.5 }} />
               <CustomTextField
                 id="input-with-sx"
-                label="Password"
+                label={t('registerContainer.Password')}
                 name="password"
                 variant="standard"
                 type="password"
@@ -191,7 +194,7 @@ const Register = () => {
               <KeyIcon sx={{ mr: 1, my: 0.5 }} />
               <CustomTextField
                 id="input-with-sx"
-                label="Password confirm"
+                label={t('registerContainer.confirmPassword')}
                 variant="standard"
                 name="confirmPassword"
                 type="password"

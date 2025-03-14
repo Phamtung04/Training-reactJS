@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { registerSchema } from '../../../yupGlobal';
 import { AuthService } from './../../../api/apiService/AuthService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { omit } from 'lodash';
@@ -9,9 +8,12 @@ import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { VALIDATE_CODES } from '../../../constants/ValidateCode';
 import Register from './Register';
 import { Button, Card } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { registerSchema } from './config';
 
 const RegisterContainer = () => {
   const queryClient = useQueryClient();
+  const {t} = useTranslation();
 
   const methods = useForm({
     mode: 'onChange',
@@ -60,12 +62,12 @@ const RegisterContainer = () => {
             variant="contained"
             sx={{ m: 3, float: 'right', bgcolor: 'white', color: 'black' }}
           >
-            Register
+            {t('registerContainer.register')}
           </Button>
         </form>
         <div className="flex gap-2 items-center justify-center pt-5">
-          <p>if you have already account?</p>
-          <button onClick={() => navigate('/login')}>Login</button>
+          <p>{t('registerContainer.ifYouHaveAlreadyAccount')}</p>
+          <button onClick={() => navigate('/login')}>{t('registerContainer.login')}</button>
         </div>
       </Card>
     </FormProvider>
