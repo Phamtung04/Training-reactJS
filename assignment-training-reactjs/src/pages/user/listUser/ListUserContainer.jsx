@@ -23,13 +23,7 @@ import { VALIDATE_CODES } from '../../../constants/ValidateCode';
 import UpdateUserContainer from '../updateUsers/UpdateUserContainer';
 import { useTranslation } from 'react-i18next';
 
-const fetchUsers = async (
-  searchValue,
-  page,
-  rowsPerPage,
-  sortName = 'userName',
-  direction = 'DESC',
-) => {
+const fetchUsers = async (searchValue, page, rowsPerPage, sortName, direction) => {
   try {
     const requestBody = {
       userName: searchValue.userName ?? '',
@@ -85,6 +79,11 @@ const ListUserContainer = () => {
     { id: 'actions', label: t('tableContainer.action'), minWidth: 200, align: 'center' },
   ];
 
+  const token = localStorage.getItem('token');
+  const decoded = jwtDecode(token);
+  const currentUserRole = decoded.data.role;
+  const currentUserId = decoded.data._id;
+
   const openModalUpdate = (id) => {
     setSelectedUserId(id);
     setOpenUpdateModal(true);
@@ -135,13 +134,13 @@ const ListUserContainer = () => {
     keepPreviousData: true,
   });
 
-  console.log(dataUsers);
-
-  const formattedRows = (dataUsers?.data?.docs || []).map((row) => ({
-    ...row,
-    dob: row.dob ? new Date(row.dob).toLocaleDateString('vi-VN') : '',
-    role: Number(row.role) === role.ADMIN ? 'Admin' : 'User',
-  }));
+  const formattedRows = (dataUsers?.data?.docs || [])
+    .filter((row) => row._id !== currentUserId)
+    .map((row) => ({
+      ...row,
+      dob: row.dob ? new Date(row.dob).toLocaleDateString('vi-VN') : '',
+      role: Number(row.role) === role.ADMIN ? 'Admin' : 'User',
+    }));
 
   const rows = dataUsers?.data?.docs?.length || [];
 
@@ -167,10 +166,6 @@ const ListUserContainer = () => {
     setSortConfig({ key, direction });
   };
 
-  const token = localStorage.getItem('token');
-  const decoded = jwtDecode(token);
-  const currentUserRole = decoded.data.role;
-
   return (
     <div className="mt-10">
       <div className="flex justify-between items-center">
@@ -187,7 +182,7 @@ const ListUserContainer = () => {
           label={t('searchContainer.searchByFullName')}
         />
 
-        <FormControl sx={{  width: '200px', height: '40px' }}>
+        <FormControl sx={{ width: '200px', height: '40px' }}>
           {/* <InputLabel>{t('searchContainer.searchByRole')}</InputLabel> */}
           <NativeSelect
             disableUnderline
@@ -200,8 +195,6 @@ const ListUserContainer = () => {
               outline: 'none',
               padding: '0 10px',
               fontSize: '14px',
-              color: '#333',
-              backgroundColor: '#fff',
               borderRadius: '15px',
             }}
           >
@@ -210,7 +203,6 @@ const ListUserContainer = () => {
             <option value={role.USER}>User</option>
           </NativeSelect>
         </FormControl>
-
       </div>
 
       <Paper elevation={0} sx={{ mt: 5, width: '100%', overflow: 'hidden' }}>
