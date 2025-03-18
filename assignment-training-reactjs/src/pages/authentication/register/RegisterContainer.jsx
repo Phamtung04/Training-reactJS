@@ -7,9 +7,10 @@ import { omit } from 'lodash';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { VALIDATE_CODES } from '../../../constants/ValidateCode';
 import Register from './Register';
-import { Button, Card } from '@mui/material';
+import { Box, Button, Card, CircularProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { registerSchema } from './config';
+import { useState } from 'react';
 
 const RegisterContainer = () => {
   const queryClient = useQueryClient();
@@ -47,39 +48,44 @@ const RegisterContainer = () => {
 
   return (
     <FormProvider {...methods}>
-      <Card
-        sx={{
-          justifyItems: 'center',
-          p: 5,
-        }}
-      >
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Register />
-          <Button
-            variant="contained"
-            type="submit"
-            sx={{
-              m: 3, float: 'right' 
-            }}
-            disabled={mutation.isLoading}
-          >
-            {mutation.isLoading ? (
-              <>
-                <CircularProgress size={24} sx={{ color: 'white', mr: 1 }} />
-                <Skeleton width={100} height={24} />
-              </>
-            ) : (
-              t('registerContainer.register')
-            )}
-          </Button>
-        </form>
-        <div className="flex gap-2 items-center justify-center pt-5">
-          <p>
-            {t('registerContainer.ifYouHaveAlreadyAccount')}
-            <Link to="/login"> {t('registerContainer.login')}</Link>
-          </p>
-        </div>
-      </Card>
+      {mutation.isLoading ? (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <Card
+          sx={{
+            justifyItems: 'center',
+            p: 5,
+          }}
+        >
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Register />
+            <Button
+              variant="contained"
+              type="submit"
+              sx={{
+                m: 3,
+                float: 'right',
+              }}
+            >
+              {t('registerContainer.register')}
+            </Button>
+          </form>
+          <div className="flex gap-2 items-center justify-center pt-5">
+            <p>
+              {t('registerContainer.ifYouHaveAlreadyAccount')}
+              <Link to="/login"> {t('registerContainer.login')}</Link>
+            </p>
+          </div>
+        </Card>
+      )}
     </FormProvider>
   );
 };

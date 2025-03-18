@@ -3,14 +3,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import ListUsers from './ListUsers';
 import ToolbarActionsSearch from '../../../components/sidebar/ToolbarActionsSearch';
 import {
-  Box,
+  Button,
   FormControl,
-  InputLabel,
-  MenuItem,
   Modal,
   NativeSelect,
   Paper,
-  Select,
   TableContainer,
   TablePagination,
 } from '@mui/material';
@@ -51,6 +48,12 @@ const ListUserContainer = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchValue, setSearchValue] = useState({
+    userName: '',
+    fullName: '',
+    role: '',
+  });
+  
+  const [tempSearchValue, setTempSearchValue] = useState({
     userName: '',
     fullName: '',
     role: '',
@@ -118,6 +121,7 @@ const ListUserContainer = () => {
       console.error('Lỗi khi xóa người dùng:', error);
     },
   });
+  
   const confirmDelete = () => {
     console.log('Delete user with id:', selectedUserId);
 
@@ -155,11 +159,17 @@ const ListUserContainer = () => {
     setPage(0);
   };
 
-  const handleSearchChange = (field, value) => {
-    setSearchValue((prev) => ({
+  const handleTempSearchChange = (field, value) => {
+    setTempSearchValue((prev) => ({
       ...prev,
       [field]: value,
     }));
+  };
+  
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchValue(tempSearchValue);
+    setPage(0);
   };
 
   const handleSort = (key, direction) => {
@@ -168,26 +178,27 @@ const ListUserContainer = () => {
 
   return (
     <div className="mt-10">
-      <div className="flex justify-between items-center">
+      <form className="flex justify-between items-center" onSubmit={handleSearch}>
         <ToolbarActionsSearch
           onChange={(e) => {
-            handleSearchChange('userName', e.target.value);
+            handleTempSearchChange('userName', e.target.value);
           }}
           label={t('searchContainer.searchByUserName')}
+          value={tempSearchValue.userName}
         />
         <ToolbarActionsSearch
           onChange={(e) => {
-            handleSearchChange('fullName', e.target.value);
+            handleTempSearchChange('fullName', e.target.value);
           }}
           label={t('searchContainer.searchByFullName')}
+          value={tempSearchValue.fullName}
         />
 
         <FormControl sx={{ width: '200px', height: '40px' }}>
-          {/* <InputLabel>{t('searchContainer.searchByRole')}</InputLabel> */}
           <NativeSelect
             disableUnderline
-            value={searchValue.role}
-            onChange={(e) => handleSearchChange('role', e.target.value)}
+            value={tempSearchValue.role}
+            onChange={(e) => handleTempSearchChange('role', e.target.value)}
             sx={{
               width: '100%',
               height: '100%',
@@ -198,12 +209,15 @@ const ListUserContainer = () => {
               borderRadius: '15px',
             }}
           >
-            <option value="">Tất cả</option>
-            <option value={role.ADMIN}>Admin</option>
-            <option value={role.USER}>User</option>
+            <option value="">{t('searchContainer.all')}</option>
+            <option value={role.ADMIN}>{t('searchContainer.admin')}</option>
+            <option value={role.USER}>{t('searchContainer.user')}</option>
           </NativeSelect>
         </FormControl>
-      </div>
+        <Button type='submit' variant="contained" color="primary">
+          {t('searchContainer.buttonSearch')}
+        </Button>
+      </form>
 
       <Paper elevation={0} sx={{ mt: 5, width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }} className="flow">
@@ -218,6 +232,7 @@ const ListUserContainer = () => {
             handleName={selectedUserName}
             sortConfig={sortConfig}
             onSort={handleSort}
+            isLoading={isLoading}
           />
         </TableContainer>
         <TablePagination

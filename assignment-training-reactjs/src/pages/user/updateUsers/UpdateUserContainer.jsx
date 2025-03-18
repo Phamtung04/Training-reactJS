@@ -7,6 +7,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { UserService } from '../../../api/apiService/UserService';
 import dayjs from 'dayjs';
 import { updateSchema } from './config';
+import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
+import { useTranslation } from 'react-i18next';
 
 const UpdateUserContainer = ({ id, onclose }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -20,6 +22,10 @@ const UpdateUserContainer = ({ id, onclose }) => {
 
   const queryClient = useQueryClient();
 
+  const { showError, showSuccess } = useErrorAndSuccess();
+
+  const {t} = useTranslation();
+
   const defaultImage =
     'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/480px-User_icon_2.svg.png';
 
@@ -32,7 +38,7 @@ const UpdateUserContainer = ({ id, onclose }) => {
   useEffect(() => {
     if (data?.data) {
       const date = dayjs(data.data.data.dob).format('YYYY-MM-DD');
-      
+
       setValue('email', data.data.data.email);
       setValue('userName', data.data.data.userName);
       setValue('fullName', data.data.data.fullName);
@@ -57,10 +63,12 @@ const UpdateUserContainer = ({ id, onclose }) => {
       return response.data;
     },
     onSuccess: () => {
+      showSuccess('Cập nhật thành công');
       onclose();
       queryClient.invalidateQueries({ queryKey: ['users'] });
     },
     onError: (error) => {
+      showError(error.response.data.message);
       console.error('Error updating user:', error);
     },
   });
@@ -98,29 +106,32 @@ const UpdateUserContainer = ({ id, onclose }) => {
     updateMutation.mutate(formData);
     console.log('Dữ liệu gửi đi:', Array.from(formData.entries()));
   };
+
   return (
     <FormProvider {...methods}>
-      <div className="items-center justify-center flex h-screen w-1/2 mx-auto">
-        <Card
+      {updateMutation.isLoading ? (
+        <Box
           sx={{
-            background:
-              'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)',
-            color: 'white',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '300px',
           }}
-          className="w-full mx-auto p-4 shadow-lg rounded-lg"
         >
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <UpdateUsers handleFileChange={handleFileChange} preview={preview} />
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ m: 3, float: 'right', bgcolor: 'white', color: 'black' }}
-            >
-              Update
-            </Button>
-          </form>
-        </Card>
-      </div>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <div className="items-center justify-center flex h-screen w-3/7 mx-auto">
+          <Card className="p-4 shadow-lg rounded-lg ">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <UpdateUsers handleFileChange={handleFileChange} preview={preview} />
+              <Button type="submit" variant="contained" sx={{ m: 3, float: 'right' }}>
+                {t('updateUserContainer.update')}
+              </Button>
+            </form>
+          </Card>
+        </div>
+      )}
     </FormProvider>
   );
 };

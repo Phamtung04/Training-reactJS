@@ -1,12 +1,7 @@
-import { AccountCircle } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
 import React, { Fragment } from 'react';
-import EmailIcon from '@mui/icons-material/Email';
-import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
-import KeyIcon from '@mui/icons-material/Key';
 import { gender, role } from '../../../constants/Enum';
 import { Controller, useFormContext } from 'react-hook-form';
-import dayjs from 'dayjs';
 import CustomTextField from '../../../components/Field/TextField';
 import CustomSelectField from '../../../components/Field/CustomSelectField';
 import { useTranslation } from 'react-i18next';
@@ -130,6 +125,7 @@ const Register = () => {
               sx={{
                 ml: 0.5,
                 my: 0.5,
+                width: '163px',
               }}
             />
           </Box>
@@ -143,6 +139,11 @@ const Register = () => {
                 { value: role.ADMIN, label: t('registerContainer.admin') },
                 { value: role.USER, label: t('registerContainer.user') },
               ]}
+              sx={{
+                ml: 0.5,
+                my: 0.5,
+                width: '163px',
+              }}
             />
           </Box>
         </Box>

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Button, Table, TableBody, TableCell, TableHead, TableRow, Box } from '@mui/material';
+import { Button, Table, TableBody, TableCell, TableHead, TableRow, Box, CircularProgress } from '@mui/material';
 import { role } from '../../../constants/Enum';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -17,6 +17,7 @@ const ListUsers = ({
   currentUserRole,
   sortConfig,
   onSort,
+  isLoading,
 }) => {
   const handleSortClick = (columnId) => {
     if (onSort) {
@@ -41,7 +42,18 @@ const ListUsers = ({
 
   return (
     <Fragment>
-      <Table stickyHeader aria-label="sticky table">
+      {isLoading ? (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '300px',
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ): (<Table stickyHeader aria-label="sticky table">
         <TableHead>
           <TableRow>
             {columns.length > 0 &&
@@ -118,7 +130,9 @@ const ListUsers = ({
             </TableRow>
           )}
         </TableBody>
-      </Table>
+      </Table>)}
+
+      
     </Fragment>
   );
 };

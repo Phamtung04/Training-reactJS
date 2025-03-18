@@ -21,14 +21,16 @@ import CustomSelectField from '../../../components/Field/CustomSelectField';
 import { gender, role } from '../../../constants/Enum';
 import CustomTextField from './../../../components/Field/TextField';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 
 const UpdateUsers = ({ handleFileChange, preview }) => {
   const { control } = useFormContext();
+  const {t} = useTranslation();
   return (
     <Fragment>
       <Box sx={{ '& > :not(style)': { m: 1 } }}>
         <Typography variant="h2" component="h5">
-          Update
+        {t('updateUserContainer.update')}
         </Typography>
         <Box sx={{ height: '', display: 'flex' }}>
           <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -43,10 +45,6 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
               control={control}
               onChange={handleFileChange}
               style={{ display: 'none' }}
-              sx={{
-                input: { color: 'white' },
-                label: { color: 'white' },
-              }}
               value={undefined}
             />
             <Button
@@ -57,7 +55,7 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
             >
               {!preview && (
                 <div>
-                  <p className="text-white">
+                  <p>
                     <ImageIcon sx={{ mr: 1, my: 0.5 }} />
                     Thay đổi avatar
                   </p>
@@ -71,93 +69,66 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
             </Button>
           </Box>
         </Box>
-        <Box sx={{ height: '60px' }}>
-          <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-            <EmailIcon sx={{ mr: 1, my: 0.5 }} />
-            <CustomTextField
-              type="email"
-              id="input-with-sx"
-              name="email"
-              control={control}
-              label={'Email'}
-              variant="standard"
-              className="w-70"
-              disabled
-              sx={{
-                input: { color: 'white' },
-                label: { color: 'white' },
-              }}
-            />
-          </Box>
-        </Box>
+
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <Box sx={{ height: '60px' }}>
+          <Box sx={{ height: '60px', mt: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-              <AccountCircle sx={{ mr: 1, my: 0.5 }} />
+              {/* <EmailIcon sx={{ mr: 1, my: 0.5 }} /> */}
               <CustomTextField
+                type="email"
                 id="input-with-sx"
-                label="userName"
-                name="userName"
-                variant="standard"
-                className="w-70"
+                name="email"
                 control={control}
-                sx={{
-                  input: { color: 'white' },
-                  label: { color: 'white' },
-                }}
+                label={t('updateUserContainer.Email')}
+                variant="standard"
+                className="w-71"
+                disabled
               />
             </Box>
           </Box>
 
-          <Box sx={{ height: '60px' }}>
-            <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 5 }}>
-              <AccountCircle sx={{ mr: 1, my: 0.5 }} />
+          <Box sx={{ height: '60px', ml: 5 }}>
+            <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+              {/* <AccountCircle sx={{ mr: 1, my: 0.5 }} /> */}
               <CustomTextField
                 id="input-with-sx"
-                label="Full name"
-                name="fullName"
-                variant="standard"
+                label={t('updateUserContainer.userName')}
+                name="userName"
                 className="w-70"
                 control={control}
-                sx={{
-                  input: { color: 'white' },
-                  label: { color: 'white' },
-                }}
               />
             </Box>
           </Box>
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <Box sx={{ alignItems: 'flex-end', height: '60px' }}>
+          <Box sx={{ alignItems: 'flex-end', height: '60px', mt: 3 }}>
             <Controller
               name="dob"
               defaultValue=""
               render={({ field }) => (
                 <CustomTextField
                   {...field}
-                  label="Date birth"
+                  label={t('updateUserContainer.birthday')}
                   control={control}
                   type="date"
                   value={field.value || ''}
-                  // onChange={(e) => {
-                  //   const formattedDate = e.target.value
-                  //     ? dayjs(e.target.value).format('YYYY-MM-DD')
-                  //     : '';
-                  //   field.onChange(formattedDate);
-                  // }}
-
                   variant="standard"
-                  className="w-50"
+                  className="w-70"
                   sx={{
-                    ml: 0.5,
                     my: 0.5,
-                    input: { color: 'white' },
-                    label: { color: 'white' },
-                    width: '310px',
+                    '& input::-webkit-calendar-picker-indicator': {
+                      filter: 'invert(0%) brightness(0%)',
+                      cursor: 'pointer',
+                    },
                   }}
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  inputProps={{
+                    max: new Date(new Date().setDate(new Date().getDate() - 1))
+                      .toISOString()
+                      .split("T")[0],
                   }}
                 />
               )}
@@ -165,13 +136,12 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
           </Box>
 
           <Box sx={{ height: '60px' }}>
-            <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 5 }}>
-              <ContactPhoneIcon sx={{ mr: 1, my: 0.5 }} />
+            <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 5, mt: 0.5 }}>
+              {/* <ContactPhoneIcon sx={{ mr: 1, my: 0.5 }} /> */}
               <CustomTextField
                 id="input-with-sx"
-                label="Phone number"
+                label={t('updateUserContainer.phone')}
                 name="phoneNumber"
-                variant="standard"
                 className="w-70"
                 onKeyDown={(e) => {
                   if (
@@ -182,31 +152,26 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
                   }
                 }}
                 control={control}
-                sx={{
-                  input: { color: 'white' },
-                  label: { color: 'white' },
-                }}
               />
             </Box>
           </Box>
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <Box sx={{ display: 'flex', alignItems: 'flex-end', height: '60px' }}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end', height: '60px', mt: 2 }}>
             <CustomSelectField
               name="gender"
-              label="Gender"
+              label={t('updateUserContainer.gender')}
               value={gender.NAM ?? ''}
               control={control}
               options={[
-                { value: gender.NAM, label: 'Nam' },
-                { value: gender.NU, label: 'Nữ' },
+                { value: gender.NAM, label: t('updateUserContainer.male') },
+                { value: gender.NU, label: t('updateUserContainer.female') },
               ]}
               sx={{
                 ml: 0.5,
                 my: 0.5,
-                input: { color: 'white' },
-                label: { color: 'white' },
+                width: '120px',
               }}
             />
           </Box>
@@ -214,40 +179,33 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
           <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 2, height: '60px' }}>
             <CustomSelectField
               name="role"
-              label="Role"
+              label={t('updateUserContainer.role')}
               value={role.ADMIN ?? ''}
               control={control}
               options={[
-                { value: role.ADMIN, label: 'Quản trị viên' },
-                { value: role.USER, label: 'Nhân viên' },
+                { value: role.ADMIN, label: t('updateUserContainer.admin')  },
+                { value: role.USER, label: t('updateUserContainer.user')  },
               ]}
               sx={{
                 ml: 0.5,
                 my: 0.5,
-                input: { color: 'white' },
-                label: { color: 'white' },
+                width: '125px',
               }}
             />
           </Box>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <Box sx={{ height: '55px', ml: 1 }}>
+          <Box sx={{ height: '55px', ml: 1, mt: 2 }}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
               <CustomTextField
                 id="standard-multiline-static"
-                label="Description"
+                label={t('updateUserContainer.Description')}
                 name="description"
                 multiline
                 variant="standard"
-                className="w-104"
+                className="w-70"
                 rows={2}
                 control={control}
-                inputProps={{
-                  style: { color: 'white' },
-                }}
-                InputLabelProps={{
-                  style: { color: 'white' },
-                }}
               />
             </Box>
           </Box>

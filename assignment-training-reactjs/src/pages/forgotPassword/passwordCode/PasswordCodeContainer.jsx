@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { VALIDATE_CODES } from '../../../constants/ValidateCode';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Card, DialogActions, DialogTitle, Typography } from '@mui/material';
+import { Box, Button, Card, CircularProgress, DialogActions, DialogTitle, Typography } from '@mui/material';
 import PasswordCode from './PasswordCode';
 import { useNavigate } from 'react-router-dom';
 import { PasswordVerifiedContext } from '../../../contexts/PasswordVerifiedContext';
@@ -52,27 +52,39 @@ const PasswordCodeContainer = () => {
   };
   return (
     <FormProvider {...methods}>
-      <Card
-        sx={{
-          width: '400px',
-          textAlign: 'center',
-          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
-          p: 1
-        }}
-      >
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Typography variant="h5" component={'h5'}>
-            {t('passCodeContainer.passCode')}
-          </Typography>
-          <PasswordCode />
-          <Box sx={{ pb: 3, px: 3, float: 'right' }}>
-            <Button onClick={handleClose}>{t('passCodeContainer.cancel')}</Button>
-            <Button variant="contained" type="submit">
-              {t('passCodeContainer.continue')}
-            </Button>
-          </Box>
-        </form>
-      </Card>
+      {mutation.isLoading ? (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <Card
+          sx={{
+            width: '400px',
+            textAlign: 'center',
+            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
+            p: 1,
+          }}
+        >
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Typography variant="h5" component={'h5'}>
+              {t('passCodeContainer.passCode')}
+            </Typography>
+            <PasswordCode />
+            <Box sx={{ pb: 3, px: 3, float: 'right' }}>
+              <Button onClick={handleClose}>{t('passCodeContainer.cancel')}</Button>
+              <Button variant="contained" type="submit">
+                {t('passCodeContainer.continue')}
+              </Button>
+            </Box>
+          </form>
+        </Card>
+      )}
     </FormProvider>
   );
 };

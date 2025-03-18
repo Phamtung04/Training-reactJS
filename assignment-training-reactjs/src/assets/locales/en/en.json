@@ -42,13 +42,19 @@
     },
 
     "menuContainer": {
-        "logout": "Sign out"
+        "logout": "Sign out",
+        "listUser": "List User",
+        "order": "Order"
     },
 
     "searchContainer": {
         "searchByUserName": "Search by userName",
         "searchByFullName": "Search by fullName",
-        "searchByRole": "Role"
+        "searchByRole": "Role",
+        "buttonSearch": "Search",
+        "all": "All",
+        "admin":"Admin",
+        "user":"User"
     },
 
     "tableContainer": {
@@ -58,5 +64,21 @@
         "role": "Role",
         "birthday": "Birthday",
         "action": "Action"
+    },
+
+    "updateUserContainer": {
+        "Email": "email:",
+        "userName": "userName:",
+        "fullName": "fullName:",
+        "phone": "PhoneNumber:",
+        "role": "Role:",
+        "gender": "Gender",
+        "birthday": "Birthday:",
+        "male": "Male",
+        "female": "Female",
+        "admin": "Admin",
+        "user": "User",
+        "Description": "Description",
+        "update": "Update"
     }
 }

@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select, FormHelperText } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-const CustomSelectField = ({ name, label, control, options, rules }) => {
+const CustomSelectField = ({ name, label, control, options, rules, sx }) => {
   return (
     <Controller
       name={name}
@@ -10,7 +10,7 @@ const CustomSelectField = ({ name, label, control, options, rules }) => {
       render={({ field, fieldState: { error } }) => (
         <FormControl 
           variant="standard" 
-          sx={{ mr: 2, m: 1, width: "165px" }}
+          sx={{ mr: 2, m: 1, width: sx}}
           error={!!error} 
         >
           <InputLabel>{label}</InputLabel>

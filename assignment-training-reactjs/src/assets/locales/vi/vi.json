@@ -43,13 +43,19 @@
     },
 
     "menuContainer": {
-        "logout": "Đăng xuất"
+        "logout": "Đăng xuất",
+        "listUser": "Danh sách",
+        "order": "Đặt hàng"
     },
 
     "searchContainer": {
         "searchByUserName": "Tìm theo tên tài khoản",
         "searchByFullName": "Tìm theo tên đầy đủ",
-        "searchByRole": "Vai trò"
+        "searchByRole": "Vai trò",
+        "buttonSearch": "Tìm kiếm",
+        "all": "Tất cả",
+        "admin":"Quản trị viên",
+        "user":"Nhân viên"
     },
 
     "tableContainer": {
@@ -59,5 +65,23 @@
         "birthday": "Ngày sinh",
         "email": "Email",
         "action": "Hành động"
+    },
+
+    "updateUserContainer": {
+        "Email": "email:",
+        "userName": "Tên người dùng:",
+        "fullName": "Họ và tên:",
+        "phone": "Sđt:",
+        "role": "Vai trò:",
+        "gender": "Giới tính:",
+        "birthday": "Ngày sinh:",
+        "male": "Nam",
+        "female": "Nữ",
+        "admin": "Quản trị viên",
+        "user": "Nhân viên",
+        "Description": "Mô tả",
+        "update": "Cập nhật"
     }
+
+
 }

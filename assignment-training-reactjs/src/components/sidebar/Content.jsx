@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { use } from 'react';
 import {
   Box,
   Divider,
@@ -15,6 +15,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import SidebarFooter from './SidebarFooter';
+import { useTranslation } from 'react-i18next';
 
 const drawerWidth = 250;
 
@@ -22,13 +23,15 @@ const Contents = () => {
   const [open, setOpen] = React.useState(false);
   const location = useLocation();
 
+  const {t} = useTranslation();
+
   const toggleDrawer = () => {
     setOpen((prev) => !prev);
   };
 
   const navItems = [
-    { text: 'List User', path: '/users', icon: <DashboardIcon /> },
-    { text: 'Orders', path: '/orders', icon: <ShoppingCartIcon /> },
+    { text: t('menuContainer.listUser'), path: '/users', icon: <DashboardIcon /> },
+    { text: t('menuContainer.order'), path: '/orders', icon: <ShoppingCartIcon /> },
   ];
 
   return (
