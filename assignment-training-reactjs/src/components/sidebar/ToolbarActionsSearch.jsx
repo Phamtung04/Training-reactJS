@@ -33,7 +33,7 @@ function ToolbarActionsSearch({ onChange, label }) {
               sx: { pr: 0.5, borderRadius: 4 },
             },
           }}
-          sx={{ display: { xs: 'none', md: 'inline-block' }, mr: 1, color: '#fff' }}
+          sx={{ display: { xs: 'none', md: 'inline-block' }, mr: 1 }}
         />
       </Stack>
     );

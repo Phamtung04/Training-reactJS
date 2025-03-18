@@ -9,8 +9,7 @@ export const API_PATH = {
   },
   USER: {
     // SEARCH_USER: `${URL_API}/api/v1/users/list?page=1&limit=20&sortName=role&direction=ASC`,
-    LIST_USER: `${URL_API}/api/v1/users/list?`, // Bỏ các tham số cứng
-    // SEARCH_USER: `${URL_API}/api/v1/users/list?page=1&limit=20&sortName=userName&direction=ASC`, // Bỏ các tham số cứng
+    LIST_USER: `${URL_API}/api/v1/users/list`,
     UPDATE_USER: `${URL_API}/api/v1/users/update`,
     DELETE_USER: `${URL_API}/api/v1/users/delete`,
     GET_USER_BY_ID: `${URL_API}/api/v1/users/detail`,

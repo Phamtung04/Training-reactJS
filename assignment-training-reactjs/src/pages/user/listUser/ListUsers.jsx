@@ -1,8 +1,10 @@
-import React, { Fragment, use } from 'react';
-import { Button, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import React, { Fragment } from 'react';
+import { Button, Table, TableBody, TableCell, TableHead, TableRow, Box } from '@mui/material';
 import { role } from '../../../constants/Enum';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import SettingsIcon from '@mui/icons-material/Settings';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 const ListUsers = ({
   columns = [],
@@ -13,7 +15,30 @@ const ListUsers = ({
   handleDelete,
   handleName,
   currentUserRole,
+  sortConfig,
+  onSort,
 }) => {
+  const handleSortClick = (columnId) => {
+    if (onSort) {
+      let direction = 'ASC';
+      if (sortConfig && sortConfig.key === columnId) {
+        direction = sortConfig.direction === 'ASC' ? 'DESC' : 'ASC';
+      }
+      onSort(columnId, direction);
+    }
+  };
+
+  const getSortIcon = (columnId) => {
+    if (sortConfig && sortConfig.key === columnId) {
+      return sortConfig.direction === 'ASC' ? (
+        <ArrowUpwardIcon fontSize="small" />
+      ) : (
+        <ArrowDownwardIcon fontSize="small" />
+      );
+    }
+    return null;
+  };
+
   return (
     <Fragment>
       <Table stickyHeader aria-label="sticky table">
@@ -28,9 +53,20 @@ const ListUsers = ({
                   sx={{
                     background: '#9810fa',
                     color: '#fff',
+                    cursor: column.sortable ? 'pointer' : 'default',
                   }}
+                  onClick={() => column.sortable && handleSortClick(column.id)}
                 >
-                  {column.label}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: column.align === 'center' ? 'center' : 'flex-start',
+                    }}
+                  >
+                    {column.label}
+                    {column.sortable && getSortIcon(column.id)}
+                  </Box>
                 </TableCell>
               ))}
           </TableRow>
@@ -50,7 +86,7 @@ const ListUsers = ({
                             style={{ outline: 'none' }}
                             onClick={() => handleUpdate(row._id)}
                           >
-                            <SettingsIcon color='primary' />
+                            <SettingsIcon color="primary" />
                           </Button>
                           <Button
                             variant="contained"
@@ -61,7 +97,7 @@ const ListUsers = ({
                               handleDelete(row._id, row.userName);
                             }}
                           >
-                            <DangerousIcon color='error' />
+                            <DangerousIcon color="error" />
                           </Button>
                         </>
                       ) : (
