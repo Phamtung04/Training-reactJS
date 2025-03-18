@@ -1,9 +1,9 @@
+import React, { useState } from 'react';
+import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { ThemeSwitcher } from '@toolpad/core';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import React, { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const Language = () => {
+const Header = () => {
   const [Language, setLanguage] = useState('');
 
   const { i18n } = useTranslation();
@@ -12,9 +12,11 @@ const Language = () => {
     setLanguage(lng.target.value);
     i18n.changeLanguage(Language);
   };
-
   return (
-    <Fragment>
+    <Box
+      className="w-full shadow-md h-15"
+      sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', p: 2 }}
+    >
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-helper-label">Language</InputLabel>
         <Select
@@ -32,8 +34,8 @@ const Language = () => {
         </Select>
       </FormControl>
       <ThemeSwitcher />
-    </Fragment>
+    </Box>
   );
 };
 
-export default Language;
+export default Header;

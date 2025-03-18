@@ -2,7 +2,7 @@ import Api from '../Api';
 import API_PATH from '../../constants/apiPath';
 
 export const UserService = {
-  searchUsers: (data) => Api.post(API_PATH.USER.SEARCH_USER, data),
+  listUser: (data) => Api.post(API_PATH.USER.LIST_USER, data),
   updateUser: (data) =>
     Api.post(API_PATH.USER.UPDATE_USER, data, {
       headers: { 'Content-Type': 'multipart/form-data' },

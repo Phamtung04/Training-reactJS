@@ -6,12 +6,12 @@ import demoTheme from '../../constants/theme';
 
 const Authentication = () => {
   return (
-    <div className="items-center justify-center flex h-screen bg-gray-900">
-      <ThemeProvider theme={demoTheme}>
+    <div className="items-center justify-center flex h-screen">
+      {/* <ThemeProvider theme={demoTheme}> */}
       <Card className=" mx-auto shadow-lg ">
         <Outlet />
       </Card>
-      </ThemeProvider>
+      {/* </ThemeProvider> */}
       
     </div>
   );

@@ -1,4 +1,4 @@
-import { DialogContent, DialogContentText } from '@mui/material';
+import { Box, DialogContent, DialogContentText } from '@mui/material';
 import React, { Fragment } from 'react';
 import CustomTextField from './../../../components/Field/TextField';
 import { useFormContext } from 'react-hook-form';
@@ -11,20 +11,16 @@ export const ForgotPassword = () => {
   return (
     <Fragment>
       <DialogContent>
-        <DialogContentText sx={{ color: 'white' }}>
+        <Box>
         {t('resetPasswordContainer.title')}
-        </DialogContentText>
+        </Box>
         <CustomTextField
-          autoFocus
-          required
-          margin="dense"
           id="email"
           name="email"
           control={control}
-          placeholder="Email address"
+          placeholder={t('passCodeContainer.input')}
           type="email"
           fullWidth
-          sx={{ mt: 3, input: { color: 'white' } }}
         />
       </DialogContent>
     </Fragment>

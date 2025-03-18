@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { updateSchema } from '../../../yupGlobal';
 import UpdateUsers from './UpdateUsers';
 import { Button, Card } from '@mui/material';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { UserService } from '../../../api/apiService/UserService';
-import Api from '../../../api/Api';
-import API_PATH from '../../../constants/apiPath';
 import dayjs from 'dayjs';
+import { updateSchema } from './config';
 
 const UpdateUserContainer = ({ id, onclose }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;

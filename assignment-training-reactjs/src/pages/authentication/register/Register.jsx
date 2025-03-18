@@ -13,17 +13,16 @@ import { useTranslation } from 'react-i18next';
 
 const Register = () => {
   const { control } = useFormContext();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   return (
     <Fragment>
       <Box sx={{ '& > :not(style)': { m: 1 } }}>
-        <Typography variant="h2" component="h5">
-        {t('registerContainer.register')}
+        <Typography variant="h4" component="h5">
+          {t('registerContainer.register')}
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <Box sx={{ height: '60px' }}>
+          <Box sx={{ height: '60px', mt:3 }}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-              <AccountCircle sx={{ mr: 1, my: 0.5 }} />
               <CustomTextField
                 id="input-with-sx"
                 name="userName"
@@ -31,17 +30,12 @@ const Register = () => {
                 variant="standard"
                 control={control}
                 className="w-70"
-                sx={{
-                  input: { color: 'white' },
-                  label: { color: 'white' },
-                }}
               />
             </Box>
           </Box>
 
           <Box sx={{ height: '60px' }}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 5 }}>
-              <AccountCircle sx={{ mr: 1, my: 0.5 }} />
               <CustomTextField
                 id="input-with-sx"
                 name="fullName"
@@ -49,19 +43,14 @@ const Register = () => {
                 variant="standard"
                 control={control}
                 className="w-70"
-                sx={{
-                  input: { color: 'white' },
-                  label: { color: 'white' },
-                }}
               />
             </Box>
           </Box>
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <Box sx={{ height: '60px' }}>
+          <Box sx={{ height: '60px', mt: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-              <EmailIcon sx={{ mr: 1, my: 0.5 }} />
               <CustomTextField
                 type="email"
                 id="input-with-sx"
@@ -70,17 +59,12 @@ const Register = () => {
                 label={t('registerContainer.Email')}
                 variant="standard"
                 className="w-70"
-                sx={{
-                  input: { color: 'white' },
-                  label: { color: 'white' },
-                }}
               />
             </Box>
           </Box>
 
           <Box sx={{ height: '60px' }}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 5 }}>
-              <ContactPhoneIcon sx={{ mr: 1, my: 0.5 }} />
               <CustomTextField
                 id="input-with-sx"
                 label={t('registerContainer.phone')}
@@ -96,17 +80,13 @@ const Register = () => {
                     e.preventDefault();
                   }
                 }}
-                sx={{
-                  input: { color: 'white' },
-                  label: { color: 'white' },
-                }}
               />
             </Box>
           </Box>
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <Box sx={{ alignItems: 'flex-end', height: '60px' }}>
+          <Box sx={{ alignItems: 'flex-end', height: '60px', mt: 3 }}>
             <Controller
               name="dob"
               defaultValue=""
@@ -117,43 +97,39 @@ const Register = () => {
                   control={control}
                   type="date"
                   value={field.value || ''}
-                  // value={field.value ? dayjs(field.value).format('YYYY-MM-DD') : ''}
-                  // onChange={(e) => {
-                  //   const formattedDate = e.target.value
-                  //     ? dayjs(e.target.value).format('YYYY-MM-DD')
-                  //     : '';
-                  //   field.onChange(formattedDate);
-                  // }}
-                  variant="standard"
-                  className="w-50"
+                  className="w-55"
                   sx={{
-                    ml: 0.5,
                     my: 0.5,
-                    input: { color: 'white' },
-                    label: { color: 'white' },
+                    '& input::-webkit-calendar-picker-indicator': {
+                      filter: 'invert(0%) brightness(0%)',
+                      cursor: 'pointer',
+                    },
                   }}
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  inputProps={{
+                    max: new Date(new Date().setDate(new Date().getDate() - 1))
+                      .toISOString()
+                      .split("T")[0],
                   }}
                 />
               )}
             />
           </Box>
 
-          <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 2, height: '60px'}}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 2, height: '60px' }}>
             <CustomSelectField
               name="gender"
               label={t('registerContainer.gender')}
               control={control}
               options={[
-                { value: gender.NAM, label: t('registerContainer.male')},
+                { value: gender.NAM, label: t('registerContainer.male') },
                 { value: gender.NU, label: t('registerContainer.female') },
               ]}
               sx={{
                 ml: 0.5,
                 my: 0.5,
-                input: { color: 'white' },
-                label: { color: 'white' },
               }}
             />
           </Box>
@@ -172,9 +148,9 @@ const Register = () => {
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <Box sx={{ height: '60px' }}>
+          <Box sx={{ height: '60px', mt: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-              <KeyIcon sx={{ mr: 1, my: 0.5 }} />
+              {/* <KeyIcon sx={{ mr: 1, my: 0.5 }} /> */}
               <CustomTextField
                 id="input-with-sx"
                 label={t('registerContainer.Password')}
@@ -182,16 +158,12 @@ const Register = () => {
                 variant="standard"
                 type="password"
                 className="w-70"
-                sx={{
-                  input: { color: 'white' },
-                  label: { color: 'white' },
-                }}
               />
             </Box>
           </Box>
           <Box sx={{ height: '60px' }}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 5 }}>
-              <KeyIcon sx={{ mr: 1, my: 0.5 }} />
+              {/* <KeyIcon sx={{ mr: 1, my: 0.5 }} /> */}
               <CustomTextField
                 id="input-with-sx"
                 label={t('registerContainer.confirmPassword')}
@@ -200,10 +172,6 @@ const Register = () => {
                 type="password"
                 control={control}
                 className="w-70"
-                sx={{
-                  input: { color: 'white' },
-                  label: { color: 'white' },
-                }}
               />
             </Box>
           </Box>

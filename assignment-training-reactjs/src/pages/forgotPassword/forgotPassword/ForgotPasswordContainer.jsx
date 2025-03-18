@@ -1,23 +1,20 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { forgotSchema } from '../../../yupGlobal';
 import { ForgotPassword } from './ForgotPassword';
-import { Button, Card, Dialog, DialogActions, DialogTitle } from '@mui/material';
+import { Box, Button, Card, Dialog, DialogActions, DialogTitle, Typography } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
 import { AuthService } from '../../../api/apiService/AuthService';
-import PasswordCode from '../passwordCode/PasswordCode';
 import { useNavigate } from 'react-router-dom';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { VALIDATE_CODES } from '../../../constants/ValidateCode';
 import { PasswordVerifiedContext } from '../../../contexts/PasswordVerifiedContext';
 import { useTranslation } from 'react-i18next';
+import { forgotSchema } from './config';
 
 const ForgotPasswordContainer = () => {
-
   const { setEmail } = useContext(PasswordVerifiedContext);
-  const {t} = useTranslation();
-
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const { showError } = useErrorAndSuccess();
@@ -54,22 +51,23 @@ const ForgotPasswordContainer = () => {
     <FormProvider {...methods}>
       <Card
         sx={{
-          background: 'linear-gradient(90deg, #9810fa  0%, #3B82F6 100%)',
-          color: 'white',
           width: '400px',
           textAlign: 'center',
-          borderRadius: '10px',
+          boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+          p: 1,
         }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <DialogTitle>{t('resetPasswordContainer.reset')}</DialogTitle>
+          <Typography variant="h5" component="h5">
+            {t('resetPasswordContainer.reset')}
+          </Typography>
           <ForgotPassword />
-          <DialogActions sx={{ pb: 3, px: 3 }}>
+          <Box sx={{ pb: 3, px: 3, float: 'right' }}>
             <Button onClick={handleClose}>{t('resetPasswordContainer.cancel')}</Button>
             <Button variant="contained" type="submit">
-            {t('resetPasswordContainer.continue')}
+              {t('resetPasswordContainer.continue')}
             </Button>
-          </DialogActions>
+          </Box>
         </form>
       </Card>
     </FormProvider>

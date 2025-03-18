@@ -54,6 +54,7 @@
     "tableContainer": {
         "userName": "userName",
         "fullName": "fullName",
+        "email": "Email",
         "role": "Role",
         "birthday": "Birthday",
         "action": "Action"

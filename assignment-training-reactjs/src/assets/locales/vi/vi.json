@@ -19,7 +19,8 @@
         "passCode": "Nhập mã",
         "title": "Vui lòng nhập mã xác nhận được gửi ở email của bạn.",
         "cancel": "Hủy",
-        "continue": "Tiếp tục"
+        "continue": "Tiếp tục", 
+        "input": "Địa chỉ email"
     },
 
     "registerContainer": {
@@ -53,9 +54,10 @@
 
     "tableContainer": {
         "userName": "Tên tài khoản",
-        "fullName": "Tên đầy đủ",
+        "fullName": "Họ và tên",
         "role": "Vai trò",
         "birthday": "Ngày sinh",
+        "email": "Email",
         "action": "Hành động"
     }
 }

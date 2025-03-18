@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { VALIDATE_CODES } from '../../../constants/ValidateCode';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Card, DialogActions, DialogTitle } from '@mui/material';
+import { Box, Button, Card, DialogActions, DialogTitle, Typography } from '@mui/material';
 import PasswordCode from './PasswordCode';
 import { useNavigate } from 'react-router-dom';
 import { PasswordVerifiedContext } from '../../../contexts/PasswordVerifiedContext';
@@ -14,9 +14,9 @@ import { useTranslation } from 'react-i18next';
 
 const PasswordCodeContainer = () => {
   const navigate = useNavigate();
-  const {showError} = useErrorAndSuccess();
+  const { showError } = useErrorAndSuccess();
   const { email } = useContext(PasswordVerifiedContext);
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const schema = yup.object().shape({
     passwordCode: yup.string().required(VALIDATE_CODES.E0001),
@@ -31,23 +31,22 @@ const PasswordCodeContainer = () => {
 
   const mutation = useMutation({
     mutationFn: AuthService.confirmPassword,
-    onSuccess: ({email,data}) => {
-
-      console.log('forgot password success:', {email, data});
+    onSuccess: ({ email, data }) => {
+      console.log('forgot password success:', { email, data });
       navigate('/login');
     },
     onError: (error) => {
-      showError(VALIDATE_CODES.I0002);
+      showError(error.response.data.message);
       console.error('Lỗi khi đăng nhập:', error);
-    }
-  })
+    },
+  });
 
   const handleClose = () => {
     navigate('/');
   };
   const onSubmit = (data) => {
     const requestBody = { email, passwordCode: data.passwordCode };
-    mutation.mutate(requestBody)
+    mutation.mutate(requestBody);
     console.log('data: ', data);
     console.log('email: ', email);
   };
@@ -55,22 +54,23 @@ const PasswordCodeContainer = () => {
     <FormProvider {...methods}>
       <Card
         sx={{
-          background: 'linear-gradient(90deg, #9810fa  0%, #3B82F6 100%)',
-          color: 'white',
           width: '400px',
           textAlign: 'center',
-          borderRadius: '10px',
+          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
+          p: 1
         }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <DialogTitle>{t('passCodeContainer.passCode')}</DialogTitle>
+          <Typography variant="h5" component={'h5'}>
+            {t('passCodeContainer.passCode')}
+          </Typography>
           <PasswordCode />
-          <DialogActions sx={{ pb: 3, px: 3 }}>
+          <Box sx={{ pb: 3, px: 3, float: 'right' }}>
             <Button onClick={handleClose}>{t('passCodeContainer.cancel')}</Button>
             <Button variant="contained" type="submit">
-            {t('passCodeContainer.continue')}
+              {t('passCodeContainer.continue')}
             </Button>
-          </DialogActions>
+          </Box>
         </form>
       </Card>
     </FormProvider>

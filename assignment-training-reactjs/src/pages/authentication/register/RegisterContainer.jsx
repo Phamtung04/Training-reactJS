@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthService } from './../../../api/apiService/AuthService';
@@ -13,7 +13,7 @@ import { registerSchema } from './config';
 
 const RegisterContainer = () => {
   const queryClient = useQueryClient();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const methods = useForm({
     mode: 'onChange',
@@ -34,7 +34,7 @@ const RegisterContainer = () => {
     },
 
     onError: (error) => {
-      showError(VALIDATE_CODES.I0002);
+      showError(error.response.data.message);
       console.error('Lỗi khi tạo người dùng:', error);
     },
   });
@@ -49,25 +49,35 @@ const RegisterContainer = () => {
     <FormProvider {...methods}>
       <Card
         sx={{
-          background: 'linear-gradient(90deg, #9810fa  0%, #3B82F6 100%)',
-          color: 'white',
           justifyItems: 'center',
+          p: 5,
         }}
-        className="bg-gradient-to-r from-purple-600 to-blue-500"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Register />
           <Button
-            type="submit"
             variant="contained"
-            sx={{ m: 3, float: 'right', bgcolor: 'white', color: 'black' }}
+            type="submit"
+            sx={{
+              m: 3, float: 'right' 
+            }}
+            disabled={mutation.isLoading}
           >
-            {t('registerContainer.register')}
+            {mutation.isLoading ? (
+              <>
+                <CircularProgress size={24} sx={{ color: 'white', mr: 1 }} />
+                <Skeleton width={100} height={24} />
+              </>
+            ) : (
+              t('registerContainer.register')
+            )}
           </Button>
         </form>
         <div className="flex gap-2 items-center justify-center pt-5">
-          <p>{t('registerContainer.ifYouHaveAlreadyAccount')}</p>
-          <button onClick={() => navigate('/login')}>{t('registerContainer.login')}</button>
+          <p>
+            {t('registerContainer.ifYouHaveAlreadyAccount')}
+            <Link to="/login"> {t('registerContainer.login')}</Link>
+          </p>
         </div>
       </Card>
     </FormProvider>

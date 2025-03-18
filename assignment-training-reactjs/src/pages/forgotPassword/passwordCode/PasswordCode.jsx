@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { DialogContent, DialogContentText } from '@mui/material';
+import { Box, DialogContent, DialogContentText, Typography } from '@mui/material';
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
 import CustomTextField from './../../../components/Field/TextField';
@@ -11,19 +11,16 @@ const PasswordCode = () => {
   return (
     <Fragment>
       <DialogContent>
-        <DialogContentText sx={{ color: 'white' }}>
+        <Box>
         {t('passCodeContainer.title')}
-        </DialogContentText>
+        </Box>
         <CustomTextField
-          autoFocus
-          required
-          margin="dense"
           id="passwordCode"
           name="passwordCode"
           placeholder="Password code"
           fullWidth
           control={control}
-          sx={{ mt: 3, input: { color: 'white' } }}
+          sx={{ mt: 3}}
         />
       </DialogContent>
     </Fragment>

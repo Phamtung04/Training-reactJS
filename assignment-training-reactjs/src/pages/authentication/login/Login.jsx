@@ -11,17 +11,14 @@ const Login = () => {
 
   return (
     <Fragment>
-      <Box sx={{ '& > :not(style)': { m: 1 } }}>
+      <Box sx={{ '& > :not(style)': { m: 1, mt: 2 } }}>
         <CustomTextField
           id="filled-search"
           label={t('loginContainer.Email')}
           name='email'
           placeholder="your@email.com"
-          variant="filled"
           control={control}
           sx={{
-            input: { color: 'white' },
-            label: { color: 'white' },
             width: '300px',
           }}
         />
@@ -37,8 +34,6 @@ const Login = () => {
           control={control}
           sx={{
             width: '300px',
-            input: { color: 'white' },
-            label: { color: 'white' },
           }}
         />
       </Box>
