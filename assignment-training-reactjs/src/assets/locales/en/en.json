@@ -19,7 +19,8 @@
         "passCode": "Password code",
         "title": "Please enter the confirmation code sent to your email.",
         "cancel": "Cancel",
-        "continue": "Continue"
+        "continue": "Continue",
+        "passwordCode": "Password code"
     },
 
     "registerContainer": {

@@ -17,7 +17,7 @@ const PasswordCode = () => {
         <CustomTextField
           id="passwordCode"
           name="passwordCode"
-          placeholder="Password code"
+          placeholder={t('passCodeContainer.passwordCode')}
           fullWidth
           control={control}
           sx={{ mt: 3}}

@@ -20,7 +20,8 @@
         "title": "Vui lòng nhập mã xác nhận được gửi ở email của bạn.",
         "cancel": "Hủy",
         "continue": "Tiếp tục", 
-        "input": "Địa chỉ email"
+        "input": "Địa chỉ email",
+        "passwordCode": "Mã xác nhận"
     },
 
     "registerContainer": {
