@@ -1,13 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import React, { Fragment } from 'react';
-import { gender, role } from '../../../constants/Enum';
-import { Controller, useFormContext } from 'react-hook-form';
+import { gender, role } from '../../../constants/enum';
+import { Controller } from 'react-hook-form';
 import CustomTextField from '../../../components/Field/TextField';
 import CustomSelectField from '../../../components/Field/CustomSelectField';
 import { useTranslation } from 'react-i18next';
 
 const Register = () => {
-  const { control } = useFormContext();
+  // const { control } = useFormContext();
   const { t } = useTranslation();
   return (
     <Fragment>
@@ -23,7 +23,7 @@ const Register = () => {
                 name="userName"
                 label={t('registerContainer.userName')}
                 variant="standard"
-                control={control}
+                // control={control}
                 className="w-70"
               />
             </Box>
@@ -36,7 +36,7 @@ const Register = () => {
                 name="fullName"
                 label={t('registerContainer.fullName')}
                 variant="standard"
-                control={control}
+                // control={control}
                 className="w-70"
               />
             </Box>
@@ -50,7 +50,7 @@ const Register = () => {
                 type="email"
                 id="input-with-sx"
                 name="email"
-                control={control}
+                // control={control}
                 label={t('registerContainer.Email')}
                 variant="standard"
                 className="w-70"
@@ -64,7 +64,7 @@ const Register = () => {
                 id="input-with-sx"
                 label={t('registerContainer.phone')}
                 name="phoneNumber"
-                control={control}
+                // control={control}
                 variant="standard"
                 className="w-70"
                 onKeyDown={(e) => {
@@ -89,7 +89,7 @@ const Register = () => {
                 <CustomTextField
                   {...field}
                   label={t('registerContainer.birthday')}
-                  control={control}
+                  // control={control}
                   type="date"
                   value={field.value || ''}
                   className="w-55"
@@ -117,7 +117,7 @@ const Register = () => {
             <CustomSelectField
               name="gender"
               label={t('registerContainer.gender')}
-              control={control}
+              // control={control}
               options={[
                 { value: gender.NAM, label: t('registerContainer.male') },
                 { value: gender.NU, label: t('registerContainer.female') },
@@ -134,7 +134,7 @@ const Register = () => {
             <CustomSelectField
               name="role"
               label={t('registerContainer.role')}
-              control={control}
+              // control={control}
               options={[
                 { value: role.ADMIN, label: t('registerContainer.admin') },
                 { value: role.USER, label: t('registerContainer.user') },
@@ -171,7 +171,7 @@ const Register = () => {
                 variant="standard"
                 name="confirmPassword"
                 type="password"
-                control={control}
+                // control={control}
                 className="w-70"
               />
             </Box>

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Button, Table, TableBody, TableCell, TableHead, TableRow, Box, CircularProgress } from '@mui/material';
-import { role } from '../../../constants/Enum';
+import { role } from '../../../constants/enum';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';

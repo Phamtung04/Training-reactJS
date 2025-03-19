@@ -18,13 +18,13 @@ import ImageIcon from '@mui/icons-material/Image';
 import DescriptionIcon from '@mui/icons-material/Description';
 import { Controller, useFormContext } from 'react-hook-form';
 import CustomSelectField from '../../../components/Field/CustomSelectField';
-import { gender, role } from '../../../constants/Enum';
+import { gender, role } from '../../../constants/enum';
 import CustomTextField from './../../../components/Field/TextField';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
 const UpdateUsers = ({ handleFileChange, preview }) => {
-  const { control } = useFormContext();
+  // const { control } = useFormContext();
   const {t} = useTranslation();
   return (
     <Fragment>
@@ -42,7 +42,7 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
               type="file"
               className="w-70"
               inputProps={{ accept: 'image/*' }}
-              control={control}
+              // control={control}
               onChange={handleFileChange}
               style={{ display: 'none' }}
               value={undefined}
@@ -78,7 +78,7 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
                 type="email"
                 id="input-with-sx"
                 name="email"
-                control={control}
+                // control={control}
                 label={t('updateUserContainer.Email')}
                 variant="standard"
                 className="w-71"
@@ -95,7 +95,7 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
                 label={t('updateUserContainer.userName')}
                 name="userName"
                 className="w-70"
-                control={control}
+                // control={control}
               />
             </Box>
           </Box>
@@ -110,7 +110,7 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
                 <CustomTextField
                   {...field}
                   label={t('updateUserContainer.birthday')}
-                  control={control}
+                  // control={control}
                   type="date"
                   value={field.value || ''}
                   variant="standard"
@@ -151,7 +151,7 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
                     e.preventDefault();
                   }
                 }}
-                control={control}
+                // control={control}
               />
             </Box>
           </Box>
@@ -163,7 +163,7 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
               name="gender"
               label={t('updateUserContainer.gender')}
               value={gender.NAM ?? ''}
-              control={control}
+              // control={control}
               options={[
                 { value: gender.NAM, label: t('updateUserContainer.male') },
                 { value: gender.NU, label: t('updateUserContainer.female') },
@@ -181,7 +181,7 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
               name="role"
               label={t('updateUserContainer.role')}
               value={role.ADMIN ?? ''}
-              control={control}
+              // control={control}
               options={[
                 { value: role.ADMIN, label: t('updateUserContainer.admin')  },
                 { value: role.USER, label: t('updateUserContainer.user')  },
@@ -205,7 +205,7 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
                 variant="standard"
                 className="w-70"
                 rows={2}
-                control={control}
+                // control={control}
               />
             </Box>
           </Box>

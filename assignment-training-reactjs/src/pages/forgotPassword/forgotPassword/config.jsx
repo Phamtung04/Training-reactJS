@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { VALIDATE_CODES } from '../../../constants/ValidateCode';
+import { VALIDATE_CODES } from '../../../constants/validateCode';
 
 
 export const forgotSchema = yup.object().shape({

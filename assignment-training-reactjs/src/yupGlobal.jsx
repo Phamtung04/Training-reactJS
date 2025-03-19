@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { VALIDATE_CODES } from './constants/ValidateCode';
+import { VALIDATE_CODES } from './constants/validateCode';
 import dayjs from 'dayjs';
 
 // export const loginSchema = yup.object().shape({

@@ -1,7 +1,7 @@
 import { Box, Button, Modal, Typography } from '@mui/material';
 import React from 'react';
 
-const Delete = ({ open, onClose, onDelete, id, name }) => {
+const ModalConsentient = ({ open, onClose, onDelete, id, title, message }) => {
   return (
     <Modal open={open} onClose={onClose}>
       <Box
@@ -14,15 +14,21 @@ const Delete = ({ open, onClose, onDelete, id, name }) => {
           bgcolor: 'background.paper',
           boxShadow: 24,
           p: 4,
-          textAlign: 'center'
+          textAlign: 'center',
         }}
       >
         <Typography id="modal-modal-title" variant="h4" component="h2">
-          Delete data
+          {/* Delete data */}
+          {title}
         </Typography>
-        <Typography id="modal-modal-description" sx={{ height: 60, mt: 2 }}>
-          Bạn có xóa <span className='text-red-500'>{name}</span> hay không ?
-        </Typography>
+        <Typography
+          id="modal-modal-description"
+          sx={{ height: 60, mt: 2 }}
+          dangerouslySetInnerHTML={{ __html: message }}
+        />
+          {/* Bạn có xóa <span className='text-red-500'>{name}</span> hay không ? */}
+          {/* {message}
+        </Typography> */}
         <Button
           variant="contained"
           color="error"
@@ -42,4 +48,4 @@ const Delete = ({ open, onClose, onDelete, id, name }) => {
   );
 };
 
-export default Delete;
+export default ModalConsentient;

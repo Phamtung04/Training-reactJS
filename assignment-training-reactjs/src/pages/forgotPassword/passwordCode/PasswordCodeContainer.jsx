@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { VALIDATE_CODES } from '../../../constants/ValidateCode';
+import { VALIDATE_CODES } from '../../../constants/validateCode';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, Card, CircularProgress, DialogActions, DialogTitle, Typography } from '@mui/material';
 import PasswordCode from './PasswordCode';

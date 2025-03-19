@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import ListUsers from './ListUsers';
 import ToolbarActionsSearch from '../../../components/sidebar/ToolbarActionsSearch';
@@ -13,10 +13,10 @@ import {
 } from '@mui/material';
 import { UserService } from './../../../api/apiService/UserService';
 import { jwtDecode } from 'jwt-decode';
-import { role } from '../../../constants/Enum';
-import Delete from '../../../components/delete/Delete';
+import { role } from '../../../constants/enum';
+import ModalConsentient from '../../../components/modal/ModalConsentient';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
-import { VALIDATE_CODES } from '../../../constants/ValidateCode';
+import { VALIDATE_CODES } from '../../../constants/validateCode';
 import UpdateUserContainer from '../updateUsers/UpdateUserContainer';
 import { useTranslation } from 'react-i18next';
 
@@ -36,7 +36,6 @@ const fetchUsers = async (searchValue, page, rowsPerPage, sortName, direction) =
       direction,
     );
 
-    console.log(response);
     return response.data;
   } catch (error) {
     console.error('Lỗi khi gọi API tìm kiếm người dùng:', error);
@@ -52,7 +51,7 @@ const ListUserContainer = () => {
     fullName: '',
     role: '',
   });
-  
+
   const [tempSearchValue, setTempSearchValue] = useState({
     userName: '',
     fullName: '',
@@ -60,8 +59,9 @@ const ListUserContainer = () => {
   });
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [selectedUserId, setSelectedUserId] = useState(null);
-  const [selectedUserName, setSelectedUserName] = useState(null);
+  // const [selectedUserId, setSelectedUserId] = useState(null);
+  // const [selectedUserName, setSelectedUserName] = useState(null);
+  const [selectedUser, setSelectedUser] = useState({ id: null, name: null });
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const { showError, showSuccess } = useErrorAndSuccess();
   const [sortConfig, setSortConfig] = useState({
@@ -74,10 +74,16 @@ const ListUserContainer = () => {
   const queryClient = useQueryClient();
 
   const columns = [
-    { id: 'fullName', label: t('tableContainer.fullName'), minWidth: 150 },
+    { id: 'fullName', label: t('tableContainer.fullName'), minWidth: 150, sortable: true },
     { id: 'userName', label: t('tableContainer.userName'), minWidth: 150, sortable: true },
-    { id: 'email', label: t('tableContainer.email'), minWidth: 170 },
-    { id: 'dob', label: t('tableContainer.birthday'), minWidth: 100, align: 'center' },
+    { id: 'email', label: t('tableContainer.email'), minWidth: 170, sortable: true },
+    {
+      id: 'dob',
+      label: t('tableContainer.birthday'),
+      minWidth: 100,
+      align: 'center',
+      sortable: true,
+    },
     { id: 'role', label: t('tableContainer.role'), minWidth: 150, align: 'center' },
     { id: 'actions', label: t('tableContainer.action'), minWidth: 200, align: 'center' },
   ];
@@ -88,7 +94,7 @@ const ListUserContainer = () => {
   const currentUserId = decoded.data._id;
 
   const openModalUpdate = (id) => {
-    setSelectedUserId(id);
+    setSelectedUser({ id });
     setOpenUpdateModal(true);
   };
 
@@ -97,8 +103,8 @@ const ListUserContainer = () => {
   };
 
   const openModalDelete = (id, name) => {
-    setSelectedUserId(id);
-    setSelectedUserName(name);
+    setSelectedUser({ id, name });
+    // setSelectedUserName(name);
     setOpenDeleteModal(true);
   };
 
@@ -114,22 +120,24 @@ const ListUserContainer = () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
       showSuccess(VALIDATE_CODES.I0001);
       setOpenDeleteModal(false);
-      setSelectedUserId(null);
+      // setSelectedUserId(null);
+      setSelectedUser({ id: '', name: '' });
     },
     onError: (error) => {
       showError(error.response.data.message);
       console.error('Lỗi khi xóa người dùng:', error);
     },
   });
-  
-  const confirmDelete = () => {
-    console.log('Delete user with id:', selectedUserId);
 
-    if (!selectedUserId) return;
-    deleteUser(selectedUserId);
+  const confirmDelete = () => {
+    // console.log('Delete user with id:', selectedUserId);
+
+    if (!selectedUser.id) return;
+    deleteUser(selectedUser.id);
 
     setOpenDeleteModal(false);
-    setSelectedUserId(null);
+    // setSelectedUserId(null);
+    setSelectedUser({ id: '', name: '' });
   };
 
   const { data: dataUsers, isLoading } = useQuery({
@@ -165,7 +173,7 @@ const ListUserContainer = () => {
       [field]: value,
     }));
   };
-  
+
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchValue(tempSearchValue);
@@ -175,7 +183,6 @@ const ListUserContainer = () => {
   const handleSort = (key, direction) => {
     setSortConfig({ key, direction });
   };
-
   return (
     <div className="mt-10">
       <form className="flex justify-between items-center" onSubmit={handleSearch}>
@@ -214,7 +221,7 @@ const ListUserContainer = () => {
             <option value={role.USER}>{t('searchContainer.user')}</option>
           </NativeSelect>
         </FormControl>
-        <Button type='submit' variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary">
           {t('searchContainer.buttonSearch')}
         </Button>
       </form>
@@ -229,7 +236,8 @@ const ListUserContainer = () => {
             currentUserRole={currentUserRole}
             handleUpdate={openModalUpdate}
             handleDelete={openModalDelete}
-            handleName={selectedUserName}
+            // handleName={selectedUserName}
+            handleName={selectedUser.name}
             sortConfig={sortConfig}
             onSort={handleSort}
             isLoading={isLoading}
@@ -247,15 +255,16 @@ const ListUserContainer = () => {
       </Paper>
 
       <Modal open={openUpdateModal} onClose={handleCloseModalUpdate}>
-        <UpdateUserContainer onclose={handleCloseModalUpdate} id={selectedUserId} />
+        <UpdateUserContainer onclose={handleCloseModalUpdate} id={selectedUser.id} />
       </Modal>
 
-      <Delete
+      <ModalConsentient
         open={openDeleteModal}
         onClose={handleCloseModalDelete}
         onDelete={confirmDelete}
-        id={selectedUserId}
-        name={`userName "${selectedUserName}"`}
+        title="Delete data"
+        message={`Bạn có xóa <span style="color: red;">userName "${selectedUser.name}"</span> hay không ? `}
+        id={selectedUser.id}
       />
     </div>
   );

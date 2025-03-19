@@ -1,12 +1,11 @@
 import { Box } from '@mui/material';
 import React, { Fragment, useState } from 'react';
-import {useFormContext } from 'react-hook-form';
 import CustomTextField from './../../../components/Field/TextField';
 import { useTranslation } from 'react-i18next';
 
 
 const Login = () => {
- const {control} = useFormContext();
+//  const {control} = useFormContext();
  const {t} = useTranslation();
 
   return (
@@ -17,7 +16,7 @@ const Login = () => {
           label={t('loginContainer.Email')}
           name='email'
           placeholder="your@email.com"
-          control={control}
+          // control={control}
           sx={{
             width: '300px',
           }}
@@ -31,7 +30,7 @@ const Login = () => {
           name='password'
           type="password"
           placeholder="*********"
-          control={control}
+          // control={control}
           sx={{
             width: '300px',
           }}

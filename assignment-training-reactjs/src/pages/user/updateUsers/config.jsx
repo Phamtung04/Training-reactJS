@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import dayjs from 'dayjs';
-import { VALIDATE_CODES } from '../../../constants/ValidateCode';
+import { VALIDATE_CODES } from '../../../constants/validateCode';
 
 export const updateSchema = yup.object().shape({
   userName: yup.string().required(VALIDATE_CODES.E0001),

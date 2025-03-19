@@ -37,9 +37,9 @@ const LoginContainer = () => {
     },
   });
 
-  const handleClickOpen = () => {
-    navigate('/forgot-password');
-  };
+  // const handleClickOpen = () => {
+  //   navigate('/forgot-password');
+  // };
 
   const onSubmit = (data) => {
     mutation.mutate(data);
@@ -90,7 +90,7 @@ const LoginContainer = () => {
             <div className="flex gap-2 items-center justify-center">
               <Link
                 to="/forgot-password"
-                onClick={handleClickOpen}
+                // onClick={handleClickOpen}
                 variant="body2"
                 sx={{ alignSelf: 'center' }}
               >

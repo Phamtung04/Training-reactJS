@@ -1,11 +1,11 @@
 import { Box, DialogContent } from '@mui/material';
 import React, { Fragment } from 'react';
-import { useFormContext } from 'react-hook-form';
+// import { useFormContext } from 'react-hook-form';
 import CustomTextField from './../../../components/Field/TextField';
 import { useTranslation } from 'react-i18next';
 
 const PasswordCode = () => {
-  const { control } = useFormContext();
+  // const { control } = useFormContext();
   const {t} = useTranslation();
   return (
     <Fragment>
@@ -18,7 +18,7 @@ const PasswordCode = () => {
           name="passwordCode"
           placeholder={t('passCodeContainer.passwordCode')}
           fullWidth
-          control={control}
+          // control={control}
           sx={{ mt: 3}}
         />
       </DialogContent>

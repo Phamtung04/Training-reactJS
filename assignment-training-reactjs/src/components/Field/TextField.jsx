@@ -1,7 +1,14 @@
 import { TextField as MuiTextField } from '@mui/material'; 
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
-const CustomTextField = ({ name, control, label, placeholder, className, sx, ...rest }) => {
+const CustomTextField = ({ name, label, placeholder, className, sx, ...rest }) => {
+  const {
+    control,
+    // watch,
+    // setValue,
+    // trigger,
+    // formState: { errors },
+  } = useFormContext();
   return (
     <Controller
       name={name}

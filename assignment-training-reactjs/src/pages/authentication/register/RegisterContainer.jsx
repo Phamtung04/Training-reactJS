@@ -5,7 +5,7 @@ import { AuthService } from './../../../api/apiService/AuthService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { omit } from 'lodash';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
-import { VALIDATE_CODES } from '../../../constants/ValidateCode';
+import { VALIDATE_CODES } from '../../../constants/validateCode';
 import Register from './Register';
 import { Box, Button, Card, CircularProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';

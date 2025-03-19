@@ -35,6 +35,7 @@ const UpdateUserContainer = ({ id, onclose }) => {
     keepPreviousData: true,
   });
 
+
   useEffect(() => {
     if (data?.data) {
       const date = dayjs(data.data.data.dob).format('YYYY-MM-DD');
@@ -59,7 +60,7 @@ const UpdateUserContainer = ({ id, onclose }) => {
   const updateMutation = useMutation({
     mutationFn: async (formData) => {
       const response = await UserService.updateUser(formData);
-      console.log('response: ', response.data);
+      // console.log('response: ', response.data);
       return response.data;
     },
     onSuccess: () => {
@@ -87,7 +88,6 @@ const UpdateUserContainer = ({ id, onclose }) => {
   };
 
   const onSubmit = (data) => {
-    console.log('Dữ liệu từ form:', data);
 
     const formData = new FormData();
     formData.append('id', id);
@@ -104,7 +104,7 @@ const UpdateUserContainer = ({ id, onclose }) => {
     }
 
     updateMutation.mutate(formData);
-    console.log('Dữ liệu gửi đi:', Array.from(formData.entries()));
+    // console.log('Dữ liệu gửi đi:', Array.from(formData.entries()));
   };
 
   return (

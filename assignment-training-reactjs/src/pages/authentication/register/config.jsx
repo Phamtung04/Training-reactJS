@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import yupGlobal from '../../../yupGlobal';
-import { VALIDATE_CODES } from '../../../constants/ValidateCode';
+import { VALIDATE_CODES } from '../../../constants/validateCode';
 
 export const registerSchema = yup.object().shape({
   userName: yup.string().required(VALIDATE_CODES.E0001),
