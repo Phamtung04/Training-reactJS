@@ -1,5 +1,4 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, DialogContent, DialogContentText, Typography } from '@mui/material';
+import { Box, DialogContent } from '@mui/material';
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
 import CustomTextField from './../../../components/Field/TextField';
