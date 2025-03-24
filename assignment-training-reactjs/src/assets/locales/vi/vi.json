@@ -1,0 +1,94 @@
+{
+    "loginContainer": {
+        "Email": "Tài khoản:",
+        "Password": "Mật khẩu:",
+        "Login": "Đăng nhập",
+        "register": "Đăng ký",
+        "ifYouHaveAlreadyAccount": "Nếu bạn chưa có tài khoản?",
+        "forgetYourPassword": "Quên mật khẩu?"
+    },
+
+    "resetPasswordContainer": {
+        "reset": "Đặt lại mật khẩu",
+        "title": "Vui lòng nhập địa chỉ email để nhận mã xác nhận.",
+        "cancel": "Hủy",
+        "continue": "Tiếp tục"
+    },
+
+    "passCodeContainer": {
+        "passCode": "Nhập mã",
+        "title": "Vui lòng nhập mã xác nhận được gửi ở email của bạn.",
+        "cancel": "Hủy",
+        "continue": "Tiếp tục", 
+        "input": "Địa chỉ email",
+        "passwordCode": "Mã xác nhận"
+    },
+
+    "registerContainer": {
+        "Email": "email:",
+        "Password": "Mật khẩu:",
+        "confirmPassword": "Xác nhận mật khẩu",
+        "register": "Đăng ký",
+        "login": "Đăng nhập",
+        "userName": "Tên người dùng:",
+        "fullName": "Tên đầy đủ:",
+        "phone": "Sđt:",
+        "role": "Vai trò:",
+        "gender": "Giới tính:",
+        "birthday": "Ngày sinh:",
+        "male": "Nam",
+        "female": "Nữ",
+        "admin": "Quản trị viên",
+        "user": "Nhân viên",
+        "ifYouHaveAlreadyAccount": "Nếu bạn đã có tài khoản?"
+    },
+
+    "menuContainer": {
+        "logout": "Đăng xuất",
+        "listUser": "Danh sách",
+        "order": "Đặt hàng"
+    },
+
+    "searchContainer": {
+        "searchByUserName": "Tìm theo tên tài khoản",
+        "searchByFullName": "Tìm theo tên đầy đủ",
+        "searchByRole": "Vai trò",
+        "buttonSearch": "Tìm kiếm",
+        "all": "Tất cả",
+        "admin":"Quản trị viên",
+        "user":"Nhân viên"
+    },
+
+    "tableContainer": {
+        "userName": "Tên tài khoản",
+        "fullName": "Họ và tên",
+        "role": "Vai trò",
+        "birthday": "Ngày sinh",
+        "email": "Email",
+        "action": "Hành động"
+    },
+
+    "updateUserContainer": {
+        "Email": "email:",
+        "userName": "Tên người dùng:",
+        "fullName": "Họ và tên:",
+        "phone": "Sđt:",
+        "role": "Vai trò:",
+        "gender": "Giới tính:",
+        "birthday": "Ngày sinh:",
+        "male": "Nam",
+        "female": "Nữ",
+        "admin": "Quản trị viên",
+        "user": "Nhân viên",
+        "Description": "Mô tả",
+        "update": "Cập nhật"
+    },
+
+    "actionContainer": {
+        "apply": "Đồng ý",
+        "cancel": "Hủy",
+        "message": "Bạn có chắc chắn muốn xóa"
+    }
+
+
+}
