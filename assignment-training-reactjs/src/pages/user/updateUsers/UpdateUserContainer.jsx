@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 const UpdateUserContainer = ({ id, onclose }) => {
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_URL_IMAGE;
   const methods = useForm({
     mode: 'onChange',
     resolver: yupResolver(updateSchema),
