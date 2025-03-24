@@ -32,7 +32,10 @@ function SidebarFooter({ mini }) {
         onClick={handleLogout}
       >
         {mini ? (
-          <Avatar alt="Sharp" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/480px-User_icon_2.svg.png" />
+          <Avatar
+            alt="Sharp"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/480px-User_icon_2.svg.png"
+          />
         ) : (
           <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Avatar alt="Sharp" src={BASE_URL + currentUserRole} />

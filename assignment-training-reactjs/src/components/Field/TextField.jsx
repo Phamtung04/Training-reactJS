@@ -1,20 +1,14 @@
-import { TextField as MuiTextField } from '@mui/material'; 
+import { TextField as MuiTextField } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 
 const CustomTextField = ({ name, label, placeholder, className, sx, ...rest }) => {
-  const {
-    control,
-    // watch,
-    // setValue,
-    // trigger,
-    // formState: { errors },
-  } = useFormContext();
+  const { control } = useFormContext();
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <MuiTextField 
+        <MuiTextField
           {...field}
           label={label}
           variant="standard"
@@ -31,4 +25,4 @@ const CustomTextField = ({ name, label, placeholder, className, sx, ...rest }) =
   );
 };
 
-export default CustomTextField; 
+export default CustomTextField;

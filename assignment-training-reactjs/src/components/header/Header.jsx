@@ -24,7 +24,6 @@ const Header = () => {
           <MenuItem value={'vn'}>VN</MenuItem>
         </Select>
       </FormControl>
-      {/* <ThemeSwitcher /> */}
     </Box>
   );
 };

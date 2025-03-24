@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Divider,
@@ -20,10 +20,10 @@ import { useTranslation } from 'react-i18next';
 const drawerWidth = 250;
 
 const Contents = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const location = useLocation();
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const toggleDrawer = () => {
     setOpen((prev) => !prev);

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ForgotPassword } from './ForgotPassword';
-import { Box, Button, Card, Dialog, DialogActions, DialogTitle, Typography } from '@mui/material';
+import { Box, Button, Card, Typography } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
 import { AuthService } from '../../../api/apiService/AuthService';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +29,6 @@ const ForgotPasswordContainer = () => {
     mutationFn: AuthService.forgotPassword,
     onSuccess: (data) => {
       navigate('/password-code');
-      console.log('forgot password success:', data);
     },
     onError: (error) => {
       showError(VALIDATE_CODES.I0002);
@@ -44,7 +43,6 @@ const ForgotPasswordContainer = () => {
   const onSubmit = (data) => {
     forgotPasswordMutation.mutate(data);
     setEmail(data.email);
-    console.log(data);
   };
 
   return (

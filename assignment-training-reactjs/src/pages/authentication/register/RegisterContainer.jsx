@@ -10,7 +10,6 @@ import Register from './Register';
 import { Box, Button, Card, CircularProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { registerSchema } from './config';
-import { useState } from 'react';
 
 const RegisterContainer = () => {
   const queryClient = useQueryClient();
@@ -43,7 +42,6 @@ const RegisterContainer = () => {
   const onSubmit = (data) => {
     const formData = omit(data, ['confirmPassword']);
     mutation.mutate(formData);
-    console.log(formData);
   };
 
   return (

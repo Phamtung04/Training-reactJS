@@ -1,22 +1,17 @@
-import { Box, DialogContent, DialogContentText } from '@mui/material';
+import { Box, DialogContent } from '@mui/material';
 import React, { Fragment } from 'react';
-import CustomTextField from './../../../components/Field/TextField';
 import { useTranslation } from 'react-i18next';
-
+import CustomTextField from '../../../components/field/TextField';
 
 export const ForgotPassword = () => {
-  // const { control } = useFormContext();
   const { t } = useTranslation();
   return (
     <Fragment>
       <DialogContent>
-        <Box>
-        {t('resetPasswordContainer.title')}
-        </Box>
+        <Box>{t('resetPasswordContainer.title')}</Box>
         <CustomTextField
           id="email"
           name="email"
-          // control={control}
           placeholder={t('passCodeContainer.input')}
           type="email"
           fullWidth

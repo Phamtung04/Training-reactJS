@@ -1,18 +1,15 @@
-import { FormControl, InputLabel, MenuItem, Select, FormHelperText } from "@mui/material";
-import { Controller } from "react-hook-form";
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Controller, useFormContext } from 'react-hook-form';
 
-const CustomSelectField = ({ name, label, control, options, rules, sx }) => {
+const CustomSelectField = ({ name, label, options, rules, sx }) => {
+  const { control } = useFormContext();
   return (
     <Controller
       name={name}
       control={control}
       rules={rules}
       render={({ field, fieldState: { error } }) => (
-        <FormControl 
-          variant="standard" 
-          sx={{ mr: 2, m: 1, width: sx}}
-          error={!!error} 
-        >
+        <FormControl variant="standard" sx={{ mr: 2, m: 1, width: sx }} error={!!error}>
           <InputLabel>{label}</InputLabel>
           <Select {...field} value={field.value ?? ''}>
             {options.map((option) => (
@@ -21,7 +18,6 @@ const CustomSelectField = ({ name, label, control, options, rules, sx }) => {
               </MenuItem>
             ))}
           </Select>
-          
         </FormControl>
       )}
     />

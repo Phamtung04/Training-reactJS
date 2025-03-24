@@ -2,12 +2,10 @@ import React from 'react';
 import { PasswordVerifiedProvider } from './PasswordVerifiedContext';
 import { ErrorAndSuccessProvider } from './ErrorAndSuccessContext';
 
-const AppProvider = ({children}) => {
+const AppProvider = ({ children }) => {
   return (
     <PasswordVerifiedProvider>
-        <ErrorAndSuccessProvider>
-            {children}
-        </ErrorAndSuccessProvider>
+      <ErrorAndSuccessProvider>{children}</ErrorAndSuccessProvider>
     </PasswordVerifiedProvider>
   );
 };

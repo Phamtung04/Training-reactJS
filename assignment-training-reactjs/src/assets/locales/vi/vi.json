@@ -82,6 +82,12 @@
         "user": "Nhân viên",
         "Description": "Mô tả",
         "update": "Cập nhật"
+    },
+
+    "actionContainer": {
+        "apply": "Đồng ý",
+        "cancel": "Hủy",
+        "message": "Bạn có chắc chắn muốn xóa"
     }
 
 

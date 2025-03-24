@@ -3,7 +3,7 @@ import { changeLanguage } from '../i18n';
 
 export const useLanguage = () => {
   const { i18n } = useTranslation();
-  
+
   const switchLanguage = (language) => {
     changeLanguage(language);
   };
@@ -12,6 +12,6 @@ export const useLanguage = () => {
     currentLanguage: i18n.language,
     switchLanguage,
     isVietnamese: i18n.language === 'vi',
-    isEnglish: i18n.language === 'en'
+    isEnglish: i18n.language === 'en',
   };
 };

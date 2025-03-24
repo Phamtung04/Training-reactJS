@@ -94,7 +94,6 @@ const ListUserContainer = () => {
 
   const openModalDelete = (id, name) => {
     setSelectedUser({ id, name });
-    // setSelectedUserName(name);
     setOpenDeleteModal(true);
   };
 
@@ -110,7 +109,6 @@ const ListUserContainer = () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
       showSuccess(VALIDATE_CODES.I0001);
       setOpenDeleteModal(false);
-      // setSelectedUserId(null);
       setSelectedUser({ id: '', name: '' });
     },
     onError: (error) => {
@@ -149,11 +147,9 @@ const ListUserContainer = () => {
 
   const handleChangeRowsPerPage = (event) => {
     const newRowsPerPage = parseInt(event.target.value, 10);
-    console.log('Selected rows per page:', newRowsPerPage);
     setRowsPerPage(newRowsPerPage);
     setPage(0);
   };
-
 
   const handleSort = (key, direction) => {
     setSortConfig({ key, direction });
@@ -237,7 +233,7 @@ const ListUserContainer = () => {
         onClose={handleCloseModalDelete}
         onDelete={confirmDelete}
         title="Delete data"
-        message={`Bạn có xóa <span style="color: red;">userName "${selectedUser.name}"</span> hay không ? `}
+        message={`${t('actionContainer.message')} <span style="color: red;">userName "${selectedUser.name}"</span>? `}
         id={selectedUser.id}
       />
     </div>

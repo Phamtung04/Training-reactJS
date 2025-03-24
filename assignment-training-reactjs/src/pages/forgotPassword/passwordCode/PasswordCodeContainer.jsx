@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { VALIDATE_CODES } from '../../../constants/validateCode';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Card, CircularProgress, DialogActions, DialogTitle, Typography } from '@mui/material';
+import { Box, Button, Card, CircularProgress, Typography } from '@mui/material';
 import PasswordCode from './PasswordCode';
 import { useNavigate } from 'react-router-dom';
 import { PasswordVerifiedContext } from '../../../contexts/PasswordVerifiedContext';
@@ -31,8 +31,7 @@ const PasswordCodeContainer = () => {
 
   const mutation = useMutation({
     mutationFn: AuthService.confirmPassword,
-    onSuccess: ({ email, data }) => {
-      console.log('forgot password success:', { email, data });
+    onSuccess: () => {
       navigate('/login');
     },
     onError: (error) => {
@@ -47,8 +46,6 @@ const PasswordCodeContainer = () => {
   const onSubmit = (data) => {
     const requestBody = { email, passwordCode: data.passwordCode };
     mutation.mutate(requestBody);
-    console.log('data: ', data);
-    console.log('email: ', email);
   };
   return (
     <FormProvider {...methods}>

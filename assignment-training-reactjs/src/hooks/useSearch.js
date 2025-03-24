@@ -23,7 +23,6 @@ export const useSearch = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchValue(tempSearchValue);
-    // setPage(0);
   };
   return {
     searchValue,

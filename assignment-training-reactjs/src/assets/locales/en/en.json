@@ -81,5 +81,11 @@
         "user": "User",
         "Description": "Description",
         "update": "Update"
+    },
+
+    "actionContainer": {
+        "apply": "Apply",
+        "cancel": "Cancel",
+        "message": "Do you want to delete"
     }
 }

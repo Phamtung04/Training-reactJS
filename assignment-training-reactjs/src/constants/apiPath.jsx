@@ -8,7 +8,6 @@ export const API_PATH = {
     CONFIRM_PASSWORD: `${URL_API}/api/v1/auth/confirm-password-code`,
   },
   USER: {
-    // SEARCH_USER: `${URL_API}/api/v1/users/list?page=1&limit=20&sortName=role&direction=ASC`,
     LIST_USER: `${URL_API}/api/v1/users/list`,
     UPDATE_USER: `${URL_API}/api/v1/users/update`,
     DELETE_USER: `${URL_API}/api/v1/users/delete`,

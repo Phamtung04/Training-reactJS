@@ -1,7 +1,9 @@
 import { Box, Button, Modal, Typography } from '@mui/material';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ModalConsentient = ({ open, onClose, onDelete, id, title, message }) => {
+  const { t } = useTranslation();
   return (
     <Modal open={open} onClose={onClose}>
       <Box
@@ -18,7 +20,6 @@ const ModalConsentient = ({ open, onClose, onDelete, id, title, message }) => {
         }}
       >
         <Typography id="modal-modal-title" variant="h4" component="h2">
-          {/* Delete data */}
           {title}
         </Typography>
         <Typography
@@ -26,9 +27,6 @@ const ModalConsentient = ({ open, onClose, onDelete, id, title, message }) => {
           sx={{ height: 60, mt: 2 }}
           dangerouslySetInnerHTML={{ __html: message }}
         />
-          {/* Bạn có xóa <span className='text-red-500'>{name}</span> hay không ? */}
-          {/* {message}
-        </Typography> */}
         <Button
           variant="contained"
           color="error"
@@ -38,10 +36,10 @@ const ModalConsentient = ({ open, onClose, onDelete, id, title, message }) => {
             onClose();
           }}
         >
-          Xóa
+          {t('actionContainer.apply')}
         </Button>
         <Button sx={{ mt: 2, mr: 4 }} variant="contained" color="primary" onClick={onClose}>
-          Huỷ
+          {t('actionContainer.cancel')}
         </Button>
       </Box>
     </Modal>

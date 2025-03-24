@@ -48,8 +48,6 @@ const UpdateUserContainer = ({ id, onclose }) => {
       setValue('role', data.data.data.role);
       setValue('phoneNumber', data.data.data.phoneNumber);
       setValue('description', data.data.data.description);
-      
-
 
       if (data.data.data.avatar) {
         setPreview(BASE_URL + data.data.data.avatar);
@@ -62,7 +60,6 @@ const UpdateUserContainer = ({ id, onclose }) => {
   const updateMutation = useMutation({
     mutationFn: async (formData) => {
       const response = await UserService.updateUser(formData);
-      console.log('response: ', response.data);
       return response.data;
     },
     onSuccess: () => {
@@ -105,7 +102,6 @@ const UpdateUserContainer = ({ id, onclose }) => {
     }
 
     updateMutation.mutate(formData);
-    // console.log('Dữ liệu gửi đi:', data.avatar);
   };
 
   return (
@@ -124,7 +120,6 @@ const UpdateUserContainer = ({ id, onclose }) => {
       ) : (
         <div className="items-center justify-center flex h-screen w-3/7 mx-auto">
           <Card className="p-4 shadow-lg rounded-lg">
-            {/* <div className='float-right' onClick={onclose}> <CancelIcon/> </div> */}
             <Button
               sx={{
                 float: 'right',

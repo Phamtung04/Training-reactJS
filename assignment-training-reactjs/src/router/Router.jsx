@@ -22,7 +22,7 @@ const Router = () => {
             { element: <LoginContainer />, index: true },
             { element: <LoginContainer />, path: 'login' },
             { element: <RegisterContainer />, path: 'register' },
-            { element: <ForgotPasswordContainer/>, path: 'forgot-password' },
+            { element: <ForgotPasswordContainer />, path: 'forgot-password' },
             { element: <PasswordCodeContainer />, path: 'password-code' },
           ],
         },

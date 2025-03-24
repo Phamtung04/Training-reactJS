@@ -5,9 +5,9 @@ import AppProvider from './contexts/AppProvider';
 function App() {
   return (
     <>
-        <AppProvider>
-          <Router />
-        </AppProvider>
+      <AppProvider>
+        <Router />
+      </AppProvider>
     </>
   );
 }

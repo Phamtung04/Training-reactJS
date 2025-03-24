@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Card, CircularProgress, Skeleton, Typography } from '@mui/material';
+import { Box, Button, Card, CircularProgress, Typography } from '@mui/material';
 import Login from './Login';
 import { useMutation } from '@tanstack/react-query';
 import { AuthService } from '../../../api/apiService/AuthService';
@@ -15,7 +15,6 @@ const LoginContainer = () => {
   const { showError } = useErrorAndSuccess();
   const { t } = useTranslation();
 
-
   const methods = useForm({
     mode: 'onChange',
     resolver: yupResolver(loginSchema),
@@ -27,7 +26,6 @@ const LoginContainer = () => {
     mutationFn: AuthService.login,
     onSuccess: (data) => {
       navigate('/users');
-      console.log('login success:', data);
       localStorage.setItem('token', data.data.data.accessToken);
     },
 

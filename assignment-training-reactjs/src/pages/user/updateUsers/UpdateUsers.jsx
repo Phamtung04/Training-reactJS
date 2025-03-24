@@ -1,4 +1,3 @@
-import { AccountCircle } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -7,10 +6,10 @@ import {
 import React, { Fragment } from 'react';
 import ImageIcon from '@mui/icons-material/Image';
 import { Controller } from 'react-hook-form';
-import CustomSelectField from '../../../components/Field/CustomSelectField';
 import { gender, role } from '../../../constants/enum';
-import CustomTextField from './../../../components/Field/TextField';
 import { useTranslation } from 'react-i18next';
+import CustomTextField from '../../../components/field/TextField';
+import CustomSelectField from '../../../components/field/CustomSelectField';
 
 const UpdateUsers = ({ handleFileChange, preview }) => {
   // const { control } = useFormContext();
