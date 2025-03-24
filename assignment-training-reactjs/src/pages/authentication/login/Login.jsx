@@ -3,9 +3,8 @@ import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import CustomTextField from '../../../components/field/TextField';
 
-
 const Login = () => {
- const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Fragment>
@@ -13,7 +12,7 @@ const Login = () => {
         <CustomTextField
           id="filled-search"
           label={t('loginContainer.Email')}
-          name='email'
+          name="email"
           placeholder="your@email.com"
           sx={{
             width: '300px',
@@ -25,7 +24,7 @@ const Login = () => {
         <CustomTextField
           id="outlined-password-input"
           label={t('loginContainer.Password')}
-          name='password'
+          name="password"
           type="password"
           placeholder="*********"
           sx={{

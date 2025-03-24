@@ -1,5 +1,5 @@
 import Api from '../Api';
-import API_PATH from '../../constants/apiPath';
+import API_PATH from '../../constants/ApiPath';
 
 export const AuthService = {
   register: (data) => Api.post(API_PATH.AUTH.REGISTER, data),

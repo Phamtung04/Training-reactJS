@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import React, { Fragment } from 'react';
-import { gender, role } from '../../../constants/enum';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import CustomTextField from '../../../components/field/TextField';
 import CustomSelectField from '../../../components/field/CustomSelectField';
+import { GENDER, ROLE } from '../../../constants/Enum';
 
 const Register = () => {
   const { t } = useTranslation();
@@ -112,8 +112,8 @@ const Register = () => {
               name="gender"
               label={t('registerContainer.gender')}
               options={[
-                { value: gender.NAM, label: t('registerContainer.male') },
-                { value: gender.NU, label: t('registerContainer.female') },
+                { value: GENDER.MALE, label: t('registerContainer.male') },
+                { value: GENDER.FEMALE, label: t('registerContainer.female') },
               ]}
               sx={{
                 ml: 0.5,
@@ -128,8 +128,8 @@ const Register = () => {
               name="role"
               label={t('registerContainer.role')}
               options={[
-                { value: role.ADMIN, label: t('registerContainer.admin') },
-                { value: role.USER, label: t('registerContainer.user') },
+                { value: ROLE.ADMIN, label: t('registerContainer.admin') },
+                { value: ROLE.USER, label: t('registerContainer.user') },
               ]}
               sx={{
                 ml: 0.5,

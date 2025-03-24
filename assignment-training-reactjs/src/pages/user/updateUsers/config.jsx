@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { VALIDATE_CODES } from '../../../constants/validateCode';
+import { VALIDATE_CODES } from '../../../constants/ValidateCode';
 import yupGlobal from '../../../yupGlobal';
 
 export const updateSchema = yup.object().shape({

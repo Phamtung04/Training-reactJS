@@ -1,9 +1,9 @@
-export const gender = {
-  NAM: 1,
-  NU: 2,
+export const GENDER = {
+  MALE: 1,
+  FEMALE: 2,
 };
 
-export const role = {
+export const ROLE = {
   ADMIN: 1,
   USER: 2,
 };

@@ -9,7 +9,7 @@ import {
   Box,
   CircularProgress,
 } from '@mui/material';
-import { role } from '../../../constants/enum';
+import { ROLE } from '../../../constants/Enum';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -99,7 +99,7 @@ const ListUsers = ({
                   {columns.map((column) => (
                     <TableCell key={column.id} align={column.align}>
                       {column.id === 'actions' ? (
-                        Number(currentUserRole) === role.ADMIN ? (
+                        Number(currentUserRole) === ROLE.ADMIN ? (
                           <>
                             <Button
                               variant="contained"

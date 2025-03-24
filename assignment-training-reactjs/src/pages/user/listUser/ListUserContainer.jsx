@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import ListUsers from './ListUsers';
+import ListUser from './ListUser';
 import ToolbarActionsSearch from '../../../components/sidebar/ToolbarActionsSearch';
 import {
   Button,
@@ -13,13 +13,13 @@ import {
 } from '@mui/material';
 import { UserService } from './../../../api/apiService/UserService';
 import { jwtDecode } from 'jwt-decode';
-import { role } from '../../../constants/enum';
+import { ROLE } from '../../../constants/Enum';
 import ModalConsentient from '../../../components/modal/ModalConsentient';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
-import { VALIDATE_CODES } from '../../../constants/validateCode';
+import { VALIDATE_CODES } from '../../../constants/ValidateCode';
 import UpdateUserContainer from '../updateUsers/UpdateUserContainer';
 import { useTranslation } from 'react-i18next';
-import { useSearch } from './../../../hooks/useSearch';
+import { useSearch } from '../../../hooks/useSearch';
 
 const fetchUsers = async (searchValue, page, rowsPerPage, sortName, direction) => {
   try {
@@ -136,7 +136,7 @@ const ListUserContainer = () => {
     .map((row) => ({
       ...row,
       dob: row.dob ? new Date(row.dob).toLocaleDateString('vi-VN') : '',
-      role: Number(row.role) === role.ADMIN ? 'Admin' : 'User',
+      role: Number(row.role) === ROLE.ADMIN ? 'Admin' : 'User',
     }));
 
   const rows = dataUsers?.data?.docs?.length || [];
@@ -188,8 +188,8 @@ const ListUserContainer = () => {
             }}
           >
             <option value="">{t('searchContainer.all')}</option>
-            <option value={role.ADMIN}>{t('searchContainer.admin')}</option>
-            <option value={role.USER}>{t('searchContainer.user')}</option>
+            <option value={ROLE.ADMIN}>{t('searchContainer.admin')}</option>
+            <option value={ROLE.USER}>{t('searchContainer.user')}</option>
           </NativeSelect>
         </FormControl>
         <Button type="submit" variant="contained" color="primary">
@@ -199,7 +199,7 @@ const ListUserContainer = () => {
 
       <Paper elevation={0} sx={{ mt: 5, width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }} className="flow">
-          <ListUsers
+          <ListUser
             columns={columns}
             rows={isLoading ? [] : formattedRows}
             page={page}

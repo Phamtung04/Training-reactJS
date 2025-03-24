@@ -8,7 +8,7 @@ import { useMutation } from '@tanstack/react-query';
 import { AuthService } from '../../../api/apiService/AuthService';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { useTranslation } from 'react-i18next';
-import { loginSchema } from './config';
+import { loginSchema } from './Config';
 
 const LoginContainer = () => {
   const navigate = useNavigate();
@@ -34,10 +34,6 @@ const LoginContainer = () => {
       console.error('Lỗi khi đăng nhập:', error);
     },
   });
-
-  // const handleClickOpen = () => {
-  //   navigate('/forgot-password');
-  // };
 
   const onSubmit = (data) => {
     mutation.mutate(data);
@@ -86,12 +82,7 @@ const LoginContainer = () => {
             </Button>
 
             <div className="flex gap-2 items-center justify-center">
-              <Link
-                to="/forgot-password"
-                // onClick={handleClickOpen}
-                variant="body2"
-                sx={{ alignSelf: 'center' }}
-              >
+              <Link to="/forgot-password" variant="body2" sx={{ alignSelf: 'center' }}>
                 <p>{t('loginContainer.forgetYourPassword')}</p>
               </Link>
             </div>

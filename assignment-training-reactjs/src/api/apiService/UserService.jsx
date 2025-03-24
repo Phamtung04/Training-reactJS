@@ -1,5 +1,5 @@
 import Api from '../Api';
-import API_PATH from '../../constants/apiPath';
+import API_PATH from '../../constants/ApiPath';
 
 export const UserService = {
   listUser: (data, page = 1, limit = 20, sortName = 'userName', direction = 'ASC') => {

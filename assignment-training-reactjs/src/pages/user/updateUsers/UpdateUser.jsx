@@ -6,13 +6,12 @@ import {
 import React, { Fragment } from 'react';
 import ImageIcon from '@mui/icons-material/Image';
 import { Controller } from 'react-hook-form';
-import { gender, role } from '../../../constants/enum';
+import { GENDER, ROLE } from '../../../constants/Enum';
 import { useTranslation } from 'react-i18next';
 import CustomTextField from '../../../components/field/TextField';
 import CustomSelectField from '../../../components/field/CustomSelectField';
 
 const UpdateUsers = ({ handleFileChange, preview }) => {
-  // const { control } = useFormContext();
   const {t} = useTranslation();
   return (
     <Fragment>
@@ -30,7 +29,6 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
               type="file"
               className="w-70"
               inputProps={{ accept: 'image/*' }}
-              // control={control}
               onChange={handleFileChange}
               style={{ display: 'none' }}
               value={undefined}
@@ -61,12 +59,10 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
           <Box sx={{ height: '60px', mt: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-              {/* <EmailIcon sx={{ mr: 1, my: 0.5 }} /> */}
               <CustomTextField
                 type="email"
                 id="input-with-sx"
                 name="email"
-                // control={control}
                 label={t('updateUserContainer.Email')}
                 variant="standard"
                 className="w-71"
@@ -77,13 +73,11 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
 
           <Box sx={{ height: '60px', ml: 5 }}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-              {/* <AccountCircle sx={{ mr: 1, my: 0.5 }} /> */}
               <CustomTextField
                 id="input-with-sx"
                 label={t('updateUserContainer.userName')}
                 name="userName"
                 className="w-70"
-                // control={control}
               />
             </Box>
           </Box>
@@ -98,7 +92,6 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
                 <CustomTextField
                   {...field}
                   label={t('updateUserContainer.birthday')}
-                  // control={control}
                   type="date"
                   value={field.value || ''}
                   variant="standard"
@@ -125,7 +118,6 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
 
           <Box sx={{ height: '60px' }}>
             <Box sx={{ display: 'flex', alignItems: 'flex-end', ml: 5, mt: 0.5 }}>
-              {/* <ContactPhoneIcon sx={{ mr: 1, my: 0.5 }} /> */}
               <CustomTextField
                 id="input-with-sx"
                 label={t('updateUserContainer.phone')}
@@ -139,7 +131,6 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
                     e.preventDefault();
                   }
                 }}
-                // control={control}
               />
             </Box>
           </Box>
@@ -150,11 +141,10 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
             <CustomSelectField
               name="gender"
               label={t('updateUserContainer.gender')}
-              value={gender.NAM ?? ''}
-              // control={control}
+              value={GENDER.NAM ?? ''}
               options={[
-                { value: gender.NAM, label: t('updateUserContainer.male') },
-                { value: gender.NU, label: t('updateUserContainer.female') },
+                { value: GENDER.MALE, label: t('updateUserContainer.male') },
+                { value: GENDER.FEMALE, label: t('updateUserContainer.female') },
               ]}
               sx={{
                 ml: 0.5,
@@ -168,11 +158,10 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
             <CustomSelectField
               name="role"
               label={t('updateUserContainer.role')}
-              value={role.ADMIN ?? ''}
-              // control={control}
+              value={ROLE.ADMIN ?? ''}
               options={[
-                { value: role.ADMIN, label: t('updateUserContainer.admin')  },
-                { value: role.USER, label: t('updateUserContainer.user')  },
+                { value: ROLE.ADMIN, label: t('updateUserContainer.admin')  },
+                { value: ROLE.USER, label: t('updateUserContainer.user')  },
               ]}
               sx={{
                 ml: 0.5,
@@ -193,7 +182,6 @@ const UpdateUsers = ({ handleFileChange, preview }) => {
                 variant="standard"
                 className="w-70"
                 rows={2}
-                // control={control}
               />
             </Box>
           </Box>

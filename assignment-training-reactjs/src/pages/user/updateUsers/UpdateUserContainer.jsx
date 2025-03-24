@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import UpdateUsers from './UpdateUsers';
+import UpdateUser from './UpdateUser';
 import { Button, Card, CircularProgress } from '@mui/material';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { UserService } from '../../../api/apiService/UserService';
@@ -131,7 +131,7 @@ const UpdateUserContainer = ({ id, onclose }) => {
               <CancelIcon />
             </Button>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <UpdateUsers handleFileChange={handleFileChange} preview={preview} />
+              <UpdateUser handleFileChange={handleFileChange} preview={preview} />
               <Button type="submit" variant="contained" sx={{ m: 3, float: 'right' }}>
                 {t('updateUserContainer.update')}
               </Button>
