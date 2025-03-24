@@ -1,39 +1,30 @@
-import React, { useState } from 'react';
-import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { ThemeSwitcher } from '@toolpad/core';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { Box, FormControl, MenuItem, Select } from '@mui/material';
+import { useLanguage } from '../../hooks/useLanguage';
 
 const Header = () => {
-  const [Language, setLanguage] = useState('');
-
-  const { i18n } = useTranslation();
-
-  const changeLanguage = (lng) => {
-    setLanguage(lng.target.value);
-    i18n.changeLanguage(Language);
-  };
+  const { currentLanguage, switchLanguage } = useLanguage();
   return (
     <Box
       className="w-full shadow-md h-15"
-      sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', p: 2 }}
+      sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}
     >
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-helper-label">Language</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={Language}
-          onChange={changeLanguage}
-          label="Language"
+          value={currentLanguage}
+          onChange={(e) => switchLanguage(e.target.value)}
           sx={{
-            height: 50,
+            height: 30,
+            width: 90,
           }}
         >
-          <MenuItem value={'en'}>Việt Nam</MenuItem>
-          <MenuItem value={'vn'}>English</MenuItem>
+          <MenuItem value={'en'}>EN</MenuItem>
+          <MenuItem value={'vn'}>VN</MenuItem>
         </Select>
       </FormControl>
-      <ThemeSwitcher />
+      {/* <ThemeSwitcher /> */}
     </Box>
   );
 };

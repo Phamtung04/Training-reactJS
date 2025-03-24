@@ -2,25 +2,14 @@ import { AccountCircle } from '@mui/icons-material';
 import {
   Box,
   Button,
-  Card,
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
   Typography,
 } from '@mui/material';
 import React, { Fragment } from 'react';
-import EmailIcon from '@mui/icons-material/Email';
-import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import ImageIcon from '@mui/icons-material/Image';
-import DescriptionIcon from '@mui/icons-material/Description';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import CustomSelectField from '../../../components/Field/CustomSelectField';
 import { gender, role } from '../../../constants/enum';
 import CustomTextField from './../../../components/Field/TextField';
-import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
 const UpdateUsers = ({ handleFileChange, preview }) => {

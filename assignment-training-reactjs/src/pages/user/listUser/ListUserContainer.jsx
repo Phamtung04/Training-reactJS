@@ -19,6 +19,7 @@ import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { VALIDATE_CODES } from '../../../constants/validateCode';
 import UpdateUserContainer from '../updateUsers/UpdateUserContainer';
 import { useTranslation } from 'react-i18next';
+import { useSearch } from './../../../hooks/useSearch';
 
 const fetchUsers = async (searchValue, page, rowsPerPage, sortName, direction) => {
   try {
@@ -46,32 +47,21 @@ const fetchUsers = async (searchValue, page, rowsPerPage, sortName, direction) =
 const ListUserContainer = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [searchValue, setSearchValue] = useState({
-    userName: '',
-    fullName: '',
-    role: '',
-  });
-
-  const [tempSearchValue, setTempSearchValue] = useState({
-    userName: '',
-    fullName: '',
-    role: '',
-  });
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  // const [selectedUserId, setSelectedUserId] = useState(null);
-  // const [selectedUserName, setSelectedUserName] = useState(null);
   const [selectedUser, setSelectedUser] = useState({ id: null, name: null });
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const { showError, showSuccess } = useErrorAndSuccess();
   const [sortConfig, setSortConfig] = useState({
-    key: 'userName',
+    key: 'fullName',
     direction: 'ASC',
   });
 
   const { t } = useTranslation();
 
   const queryClient = useQueryClient();
+
+  const { searchValue, handleTempSearchChange, handleSearch, tempSearchValue } = useSearch();
 
   const columns = [
     { id: 'fullName', label: t('tableContainer.fullName'), minWidth: 150, sortable: true },
@@ -130,13 +120,10 @@ const ListUserContainer = () => {
   });
 
   const confirmDelete = () => {
-    // console.log('Delete user with id:', selectedUserId);
-
     if (!selectedUser.id) return;
     deleteUser(selectedUser.id);
 
     setOpenDeleteModal(false);
-    // setSelectedUserId(null);
     setSelectedUser({ id: '', name: '' });
   };
 
@@ -167,18 +154,6 @@ const ListUserContainer = () => {
     setPage(0);
   };
 
-  const handleTempSearchChange = (field, value) => {
-    setTempSearchValue((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setSearchValue(tempSearchValue);
-    setPage(0);
-  };
 
   const handleSort = (key, direction) => {
     setSortConfig({ key, direction });
@@ -236,7 +211,6 @@ const ListUserContainer = () => {
             currentUserRole={currentUserRole}
             handleUpdate={openModalUpdate}
             handleDelete={openModalDelete}
-            // handleName={selectedUserName}
             handleName={selectedUser.name}
             sortConfig={sortConfig}
             onSort={handleSort}

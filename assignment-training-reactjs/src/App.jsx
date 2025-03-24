@@ -5,13 +5,9 @@ import AppProvider from './contexts/AppProvider';
 function App() {
   return (
     <>
-      {/* <CssVarsProvider> */}
         <AppProvider>
           <Router />
         </AppProvider>
-      {/* </CssVarsProvider> */}
-
-      {/* <Layout/> */}
     </>
   );
 }

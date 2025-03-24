@@ -13,7 +13,6 @@ const ListUsers = ({
   rowsPerPage,
   handleUpdate,
   handleDelete,
-  handleName,
   currentUserRole,
   sortConfig,
   onSort,

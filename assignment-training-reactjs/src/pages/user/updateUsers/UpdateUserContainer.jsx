@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import UpdateUsers from './UpdateUsers';
-import { Button, Card } from '@mui/material';
+import { Button, Card, CircularProgress } from '@mui/material';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { UserService } from '../../../api/apiService/UserService';
 import dayjs from 'dayjs';
 import { updateSchema } from './config';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { useTranslation } from 'react-i18next';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const UpdateUserContainer = ({ id, onclose }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -24,7 +25,7 @@ const UpdateUserContainer = ({ id, onclose }) => {
 
   const { showError, showSuccess } = useErrorAndSuccess();
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const defaultImage =
     'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/480px-User_icon_2.svg.png';
@@ -34,7 +35,6 @@ const UpdateUserContainer = ({ id, onclose }) => {
     queryFn: () => UserService.getUserById({ id }),
     keepPreviousData: true,
   });
-
 
   useEffect(() => {
     if (data?.data) {
@@ -48,6 +48,8 @@ const UpdateUserContainer = ({ id, onclose }) => {
       setValue('role', data.data.data.role);
       setValue('phoneNumber', data.data.data.phoneNumber);
       setValue('description', data.data.data.description);
+      
+
 
       if (data.data.data.avatar) {
         setPreview(BASE_URL + data.data.data.avatar);
@@ -60,7 +62,7 @@ const UpdateUserContainer = ({ id, onclose }) => {
   const updateMutation = useMutation({
     mutationFn: async (formData) => {
       const response = await UserService.updateUser(formData);
-      // console.log('response: ', response.data);
+      console.log('response: ', response.data);
       return response.data;
     },
     onSuccess: () => {
@@ -88,7 +90,6 @@ const UpdateUserContainer = ({ id, onclose }) => {
   };
 
   const onSubmit = (data) => {
-
     const formData = new FormData();
     formData.append('id', id);
     formData.append('userName', data.userName);
@@ -104,7 +105,7 @@ const UpdateUserContainer = ({ id, onclose }) => {
     }
 
     updateMutation.mutate(formData);
-    // console.log('Dữ liệu gửi đi:', Array.from(formData.entries()));
+    // console.log('Dữ liệu gửi đi:', data.avatar);
   };
 
   return (
@@ -122,7 +123,18 @@ const UpdateUserContainer = ({ id, onclose }) => {
         </Box>
       ) : (
         <div className="items-center justify-center flex h-screen w-3/7 mx-auto">
-          <Card className="p-4 shadow-lg rounded-lg ">
+          <Card className="p-4 shadow-lg rounded-lg">
+            {/* <div className='float-right' onClick={onclose}> <CancelIcon/> </div> */}
+            <Button
+              sx={{
+                float: 'right',
+                color: 'black',
+                '&:focus': { outline: 'none' },
+              }}
+              onClick={onclose}
+            >
+              <CancelIcon />
+            </Button>
             <form onSubmit={handleSubmit(onSubmit)}>
               <UpdateUsers handleFileChange={handleFileChange} preview={preview} />
               <Button type="submit" variant="contained" sx={{ m: 3, float: 'right' }}>
