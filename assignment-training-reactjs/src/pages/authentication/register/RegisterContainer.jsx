@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AuthService } from './../../../api/apiService/AuthService';
+import { AuthService } from './../../../api/apiService/authService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { omit } from 'lodash';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';

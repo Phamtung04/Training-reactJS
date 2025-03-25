@@ -1,4 +1,4 @@
-import Api from '../Api';
+import Api from '../api';
 import API_PATH from '../../constants/apiPath';
 
 export const AuthService = {

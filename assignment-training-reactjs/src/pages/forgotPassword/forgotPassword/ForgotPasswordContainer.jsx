@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ForgotPassword } from './ForgotPassword';
 import { Box, Button, Card, Typography } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
-import { AuthService } from '../../../api/apiService/AuthService';
+import { AuthService } from '../../../api/apiService/authService';
 import { useNavigate } from 'react-router-dom';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { VALIDATE_CODES } from '../../../constants/validateCode';

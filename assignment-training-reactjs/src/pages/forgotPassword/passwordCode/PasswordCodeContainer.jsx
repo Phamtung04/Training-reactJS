@@ -8,7 +8,7 @@ import PasswordCode from './PasswordCode';
 import { useNavigate } from 'react-router-dom';
 import { PasswordVerifiedContext } from '../../../contexts/PasswordVerifiedContext';
 import { useMutation } from '@tanstack/react-query';
-import { AuthService } from '../../../api/apiService/AuthService';
+import { AuthService } from '../../../api/apiService/authService';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { useTranslation } from 'react-i18next';
 

@@ -11,7 +11,7 @@ import {
   TableContainer,
   TablePagination,
 } from '@mui/material';
-import { UserService } from './../../../api/apiService/UserService';
+import { UserService } from './../../../api/apiService/userService';
 import ModalConsentient from '../../../components/modal/ModalConsentient';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { VALIDATE_CODES } from '../../../constants/validateCode';

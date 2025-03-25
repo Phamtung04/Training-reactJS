@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import UpdateUser from './UpdateUser';
 import { Button, Card, CircularProgress } from '@mui/material';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { UserService } from '../../../api/apiService/UserService';
+import { UserService } from '../../../api/apiService/userService';
 import dayjs from 'dayjs';
 import { useErrorAndSuccess } from '../../../contexts/ErrorAndSuccessContext';
 import { useTranslation } from 'react-i18next';
