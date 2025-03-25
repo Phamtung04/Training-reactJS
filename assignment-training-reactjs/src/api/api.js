@@ -24,14 +24,14 @@ Api.interceptors.response.use(
         error.response.status === STATUS_CODE.BAD_REQUEST &&
         error.response.data.details?.length > 0
       ) {
-        return Promise.reject({  // 🔥 ĐỔI THÀNH reject THAY VÌ resolve
+        return Promise.reject({
           isValidationError: true,
           validationErrors: error.response.data.details,
           originalResponse: error.response,
         });
       }
     }
-    return Promise.reject(error); // 🔥 ĐỔI THÀNH reject THAY VÌ resolve
+    return Promise.reject(error);
   }
 );
 
