@@ -1,0 +1,97 @@
+{
+    "loginContainer": {
+        "email": "Email:",
+        "password": "Password:",
+        "login": "Sign in",
+        "register": "Register",
+        "ifYouHaveAlreadyAccount": "If you have already account?",
+        "forgetYourPassword": "For get your password?"
+    },
+
+    "resetPasswordContainer": {
+        "reset": "Reset password",
+        "title": "Please enter your email address and we will send you a password code to reset your password.",
+        "cancel": "Cancel",
+        "continue": "Continue"
+    },
+
+    "passCodeContainer": {
+        "passCode": "Password code",
+        "title": "Please enter the confirmation code sent to your email.",
+        "cancel": "Cancel",
+        "continue": "Continue",
+        "passwordCode": "Password code",
+        "input": "Address email"
+    },
+
+    "registerContainer": {
+        "email": "email:",
+        "password": "Password:",
+        "confirmPassword": "Password confirmation:",
+        "register": "Register",
+        "login": "Login",
+        "userName": "UserName",
+        "fullName": "Full name",
+        "phone": "Phone Number",
+        "role": "Role",
+        "gender": "Gender",
+        "birthday": "Birthday",
+        "male": "Male",
+        "female": "Female",
+        "admin": "Admin",
+        "user": "User",
+        "ifYouHaveAlreadyAccount": "If you have already account?"
+    },
+
+    "menuContainer": {
+        "logout": "Sign out",
+        "listUser": "List User",
+        "order": "Order"
+    },
+
+    "searchContainer": {
+        "searchByUserName": "Search by userName",
+        "searchByFullName": "Search by fullName",
+        "searchByRole": "Role",
+        "buttonSearch": "Search",
+        "all": "All",
+        "admin":"Admin",
+        "user":"User"
+    },
+
+    "tableContainer": {
+        "userName": "userName",
+        "fullName": "fullName",
+        "email": "Email",
+        "role": "Role",
+        "birthday": "Birthday",
+        "action": "Action",
+        "noPermission": "No permission",
+        "noData": "No data",
+        "labelRowsPerPage": "Rows per page:",
+        "of": "of"
+    },
+
+    "updateUserContainer": {
+        "email": "email:",
+        "userName": "userName:",
+        "fullName": "fullName:",
+        "phone": "PhoneNumber:",
+        "role": "Role:",
+        "gender": "Gender",
+        "birthday": "Birthday:",
+        "male": "Male",
+        "female": "Female",
+        "admin": "Admin",
+        "user": "User",
+        "description": "Description",
+        "update": "Update"
+    },
+
+    "actionContainer": {
+        "apply": "Apply",
+        "cancel": "Cancel",
+        "message": "Do you want to delete",
+        "title": "Delete user"
+    }
+}
